@@ -1,0 +1,88 @@
+# -----------------------------------------------------------------------------
+# Operating systems
+# -----------------------------------------------------------------------------
+.DS_Store
+._*
+__MACOSX/
+Thumbs.db
+Desktop.ini
+
+# -----------------------------------------------------------------------------
+# Python
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.ipynb_checkpoints/
+
+# -----------------------------------------------------------------------------
+# Virtual environments and local secrets
+# -----------------------------------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+!.env.example
+
+# -----------------------------------------------------------------------------
+# Editors
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# -----------------------------------------------------------------------------
+# Runtime logs and cluster metadata
+# -----------------------------------------------------------------------------
+**/logs/
+**/slurm_metadata/
+*.out
+*.err
+
+# -----------------------------------------------------------------------------
+# Heavy raw experiment outputs
+# Curated case summaries, JSON manifests, tables and figures remain trackable.
+# -----------------------------------------------------------------------------
+**/steps_flat.csv
+**/steps_flat_all.csv
+**/actuator_goal_rows.csv
+**/paired_wilcoxon_tests.csv
+**/q1_analysis_test/
+ga-experimental/out/
+ga-experimental/raw-results/
+
+# -----------------------------------------------------------------------------
+# Generated environment inventories and local checks
+# -----------------------------------------------------------------------------
+**/requirements-sirius-resolved.txt
+**/.sha256_smoke_test
+
+# -----------------------------------------------------------------------------
+# Temporary files, backups and local archives
+# -----------------------------------------------------------------------------
+*.tmp
+*.temp
+*.bak
+*.backup
+*.backup_*
+*.before_*
+*.validation_completed
+*.pilot_backup_*
+*.pilot_real.backup
+*.zip
+*.tar
+*.tar.gz
+
+# Dataset and model are intentionally versioned in this repository:
+# datasets/DIRTY-DS-15-SUMMER.csv
+# models/LSTM_CLEAN-DS-15-SUMMER_best_TBS.h5

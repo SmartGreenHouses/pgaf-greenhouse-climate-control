@@ -1,0 +1,18 @@
+# This file adds rules specific to the Sirius stage.
+# General Python, OS, IDE and temporary-file rules are defined in ../.gitignore.
+
+# Cluster runtime files
+logs/
+slurm_metadata/
+*.out
+*.err
+
+# Generated environment inventory
+requirements-sirius-resolved.txt
+
+# Heavy step-level results. Compact summaries and manifests remain trackable.
+out/**/steps_flat.csv
+out/**/steps_flat_all.csv
+
+# Local validation marker
+.sha256_smoke_test
