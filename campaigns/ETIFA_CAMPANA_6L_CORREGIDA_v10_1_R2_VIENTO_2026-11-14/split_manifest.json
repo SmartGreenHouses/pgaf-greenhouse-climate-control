@@ -1,0 +1,4469 @@
+{
+  "purpose": "etifa_to_ga_models_long_horizon_window_feasibility",
+  "created_utc": "2026-11-11T20:06:32.145993+00:00",
+  "csv": "ETIFA_clean_imputed.csv",
+  "sha256": "3d74ad9113a9b35a03059786eeeb007119bd7107de6b74eb346625a65673dc15",
+  "timestamp_frequency_minutes": 15,
+  "n_rows": 100866,
+  "sensor_targets": [
+    "dry_bulb_temperature",
+    "wet_bulb_temperature",
+    "relative_humidity",
+    "humidity_deficit",
+    "outdoor_temperature",
+    "outdoor_relative_humidity",
+    "wind_speed",
+    "wind_direction",
+    "radiation"
+  ],
+  "past_actuator_inputs": [
+    "pipe_temperature",
+    "humidification",
+    "window_1_position",
+    "window_2_position",
+    "screen_1_position",
+    "screen_2_position"
+  ],
+  "time_features": "4 cyclic temporal covariates, to be generated in model pipeline",
+  "window_definition": "X[t-L+1:t] inclusive, y[t+1:t+H] inclusive",
+  "validity": "Entire X and y lie in the same partition; X finite in all 15 measured columns; y finite in the 9 sensor targets; no actuator-stability constraint.",
+  "splits": {
+    "V1": {
+      "train": {
+        "start_utc": "2019-04-29T07:30:00+00:00",
+        "end_utc": "2021-02-08T23:45:00+00:00",
+        "rows": 62562,
+        "rows_with_any_missing_value": 143
+      },
+      "validation": {
+        "start_utc": "2021-02-09T00:00:00+00:00",
+        "end_utc": "2021-06-27T17:30:00+00:00",
+        "rows": 13319,
+        "rows_with_any_missing_value": 76
+      },
+      "test": {
+        "start_utc": "2021-11-01T00:00:00+00:00",
+        "end_utc": "2022-03-14T23:45:00+00:00",
+        "rows": 12864,
+        "rows_with_any_missing_value": 32
+      }
+    },
+    "V2": {
+      "train": {
+        "start_utc": "2019-04-29T07:30:00+00:00",
+        "end_utc": "2021-02-08T23:45:00+00:00",
+        "rows": 62562,
+        "rows_with_any_missing_value": 143
+      },
+      "validation": {
+        "start_utc": "2021-11-01T00:00:00+00:00",
+        "end_utc": "2022-03-14T23:45:00+00:00",
+        "rows": 12864,
+        "rows_with_any_missing_value": 32
+      },
+      "test": {
+        "start_utc": "2021-02-09T00:00:00+00:00",
+        "end_utc": "2021-06-27T17:30:00+00:00",
+        "rows": 13319,
+        "rows_with_any_missing_value": 76
+      }
+    },
+    "V3": {
+      "train": {
+        "start_utc": "2019-09-10T07:30:00+00:00",
+        "end_utc": "2021-06-27T17:30:00+00:00",
+        "rows": 63017,
+        "rows_with_any_missing_value": 218
+      },
+      "validation": {
+        "start_utc": "2021-11-01T00:00:00+00:00",
+        "end_utc": "2022-03-14T23:45:00+00:00",
+        "rows": 12864,
+        "rows_with_any_missing_value": 32
+      },
+      "test": {
+        "start_utc": "2019-04-29T07:30:00+00:00",
+        "end_utc": "2019-09-10T07:15:00+00:00",
+        "rows": 12864,
+        "rows_with_any_missing_value": 1
+      }
+    }
+  },
+  "counts": [
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 4,
+      "candidate_windows": 62511,
+      "valid_windows": 60877,
+      "excluded_windows": 1634
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 8,
+      "candidate_windows": 62507,
+      "valid_windows": 60761,
+      "excluded_windows": 1746
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 16,
+      "candidate_windows": 62499,
+      "valid_windows": 60529,
+      "excluded_windows": 1970
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 24,
+      "candidate_windows": 62491,
+      "valid_windows": 60297,
+      "excluded_windows": 2194
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 48,
+      "candidate_windows": 62467,
+      "valid_windows": 59601,
+      "excluded_windows": 2866
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 96,
+      "candidate_windows": 62419,
+      "valid_windows": 58305,
+      "excluded_windows": 4114
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 144,
+      "candidate_windows": 62371,
+      "valid_windows": 57071,
+      "excluded_windows": 5300
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 192,
+      "candidate_windows": 62323,
+      "valid_windows": 55871,
+      "excluded_windows": 6452
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 288,
+      "candidate_windows": 62227,
+      "valid_windows": 53505,
+      "excluded_windows": 8722
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 4,
+      "candidate_windows": 62463,
+      "valid_windows": 59440,
+      "excluded_windows": 3023
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 8,
+      "candidate_windows": 62459,
+      "valid_windows": 59330,
+      "excluded_windows": 3129
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 16,
+      "candidate_windows": 62451,
+      "valid_windows": 59114,
+      "excluded_windows": 3337
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 24,
+      "candidate_windows": 62443,
+      "valid_windows": 58898,
+      "excluded_windows": 3545
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 48,
+      "candidate_windows": 62419,
+      "valid_windows": 58257,
+      "excluded_windows": 4162
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 96,
+      "candidate_windows": 62371,
+      "valid_windows": 57023,
+      "excluded_windows": 5348
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 144,
+      "candidate_windows": 62323,
+      "valid_windows": 55823,
+      "excluded_windows": 6500
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 192,
+      "candidate_windows": 62275,
+      "valid_windows": 54623,
+      "excluded_windows": 7652
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 288,
+      "candidate_windows": 62179,
+      "valid_windows": 52305,
+      "excluded_windows": 9874
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 4,
+      "candidate_windows": 62367,
+      "valid_windows": 56827,
+      "excluded_windows": 5540
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 8,
+      "candidate_windows": 62363,
+      "valid_windows": 56727,
+      "excluded_windows": 5636
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 16,
+      "candidate_windows": 62355,
+      "valid_windows": 56527,
+      "excluded_windows": 5828
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 24,
+      "candidate_windows": 62347,
+      "valid_windows": 56327,
+      "excluded_windows": 6020
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 48,
+      "candidate_windows": 62323,
+      "valid_windows": 55727,
+      "excluded_windows": 6596
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 96,
+      "candidate_windows": 62275,
+      "valid_windows": 54527,
+      "excluded_windows": 7748
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 144,
+      "candidate_windows": 62227,
+      "valid_windows": 53361,
+      "excluded_windows": 8866
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 192,
+      "candidate_windows": 62179,
+      "valid_windows": 52209,
+      "excluded_windows": 9970
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 288,
+      "candidate_windows": 62083,
+      "valid_windows": 50013,
+      "excluded_windows": 12070
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 4,
+      "candidate_windows": 62271,
+      "valid_windows": 54331,
+      "excluded_windows": 7940
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 8,
+      "candidate_windows": 62267,
+      "valid_windows": 54231,
+      "excluded_windows": 8036
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 16,
+      "candidate_windows": 62259,
+      "valid_windows": 54033,
+      "excluded_windows": 8226
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 24,
+      "candidate_windows": 62251,
+      "valid_windows": 53841,
+      "excluded_windows": 8410
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 48,
+      "candidate_windows": 62227,
+      "valid_windows": 53265,
+      "excluded_windows": 8962
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 96,
+      "candidate_windows": 62179,
+      "valid_windows": 52113,
+      "excluded_windows": 10066
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 144,
+      "candidate_windows": 62131,
+      "valid_windows": 50978,
+      "excluded_windows": 11153
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 192,
+      "candidate_windows": 62083,
+      "valid_windows": 49917,
+      "excluded_windows": 12166
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 288,
+      "candidate_windows": 61987,
+      "valid_windows": 47935,
+      "excluded_windows": 14052
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 4,
+      "candidate_windows": 62175,
+      "valid_windows": 51921,
+      "excluded_windows": 10254
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 8,
+      "candidate_windows": 62171,
+      "valid_windows": 51825,
+      "excluded_windows": 10346
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 16,
+      "candidate_windows": 62163,
+      "valid_windows": 51633,
+      "excluded_windows": 10530
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 24,
+      "candidate_windows": 62155,
+      "valid_windows": 51441,
+      "excluded_windows": 10714
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 48,
+      "candidate_windows": 62131,
+      "valid_windows": 50882,
+      "excluded_windows": 11249
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 96,
+      "candidate_windows": 62083,
+      "valid_windows": 49821,
+      "excluded_windows": 12262
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 144,
+      "candidate_windows": 62035,
+      "valid_windows": 48778,
+      "excluded_windows": 13257
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 192,
+      "candidate_windows": 61987,
+      "valid_windows": 47839,
+      "excluded_windows": 14148
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 288,
+      "candidate_windows": 61891,
+      "valid_windows": 46146,
+      "excluded_windows": 15745
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 4,
+      "candidate_windows": 61887,
+      "valid_windows": 45790,
+      "excluded_windows": 16097
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 8,
+      "candidate_windows": 61883,
+      "valid_windows": 45722,
+      "excluded_windows": 16161
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 16,
+      "candidate_windows": 61875,
+      "valid_windows": 45586,
+      "excluded_windows": 16289
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 24,
+      "candidate_windows": 61867,
+      "valid_windows": 45450,
+      "excluded_windows": 16417
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 48,
+      "candidate_windows": 61843,
+      "valid_windows": 45042,
+      "excluded_windows": 16801
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 96,
+      "candidate_windows": 61795,
+      "valid_windows": 44244,
+      "excluded_windows": 17551
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 144,
+      "candidate_windows": 61747,
+      "valid_windows": 43476,
+      "excluded_windows": 18271
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 192,
+      "candidate_windows": 61699,
+      "valid_windows": 42745,
+      "excluded_windows": 18954
+    },
+    {
+      "experiment": "V1",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 288,
+      "candidate_windows": 61603,
+      "valid_windows": 41305,
+      "excluded_windows": 20298
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 4,
+      "candidate_windows": 13268,
+      "valid_windows": 12737,
+      "excluded_windows": 531
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 8,
+      "candidate_windows": 13264,
+      "valid_windows": 12701,
+      "excluded_windows": 563
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 16,
+      "candidate_windows": 13256,
+      "valid_windows": 12629,
+      "excluded_windows": 627
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 24,
+      "candidate_windows": 13248,
+      "valid_windows": 12561,
+      "excluded_windows": 687
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 48,
+      "candidate_windows": 13224,
+      "valid_windows": 12372,
+      "excluded_windows": 852
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 96,
+      "candidate_windows": 13176,
+      "valid_windows": 12079,
+      "excluded_windows": 1097
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 144,
+      "candidate_windows": 13128,
+      "valid_windows": 11760,
+      "excluded_windows": 1368
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 192,
+      "candidate_windows": 13080,
+      "valid_windows": 11472,
+      "excluded_windows": 1608
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 288,
+      "candidate_windows": 12984,
+      "valid_windows": 10896,
+      "excluded_windows": 2088
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 4,
+      "candidate_windows": 13220,
+      "valid_windows": 12313,
+      "excluded_windows": 907
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 8,
+      "candidate_windows": 13216,
+      "valid_windows": 12288,
+      "excluded_windows": 928
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 16,
+      "candidate_windows": 13208,
+      "valid_windows": 12240,
+      "excluded_windows": 968
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 24,
+      "candidate_windows": 13200,
+      "valid_windows": 12192,
+      "excluded_windows": 1008
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 48,
+      "candidate_windows": 13176,
+      "valid_windows": 12048,
+      "excluded_windows": 1128
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 96,
+      "candidate_windows": 13128,
+      "valid_windows": 11760,
+      "excluded_windows": 1368
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 144,
+      "candidate_windows": 13080,
+      "valid_windows": 11472,
+      "excluded_windows": 1608
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 192,
+      "candidate_windows": 13032,
+      "valid_windows": 11184,
+      "excluded_windows": 1848
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 288,
+      "candidate_windows": 12936,
+      "valid_windows": 10608,
+      "excluded_windows": 2328
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 4,
+      "candidate_windows": 13124,
+      "valid_windows": 11736,
+      "excluded_windows": 1388
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 8,
+      "candidate_windows": 13120,
+      "valid_windows": 11712,
+      "excluded_windows": 1408
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 16,
+      "candidate_windows": 13112,
+      "valid_windows": 11664,
+      "excluded_windows": 1448
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 24,
+      "candidate_windows": 13104,
+      "valid_windows": 11616,
+      "excluded_windows": 1488
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 48,
+      "candidate_windows": 13080,
+      "valid_windows": 11472,
+      "excluded_windows": 1608
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 96,
+      "candidate_windows": 13032,
+      "valid_windows": 11184,
+      "excluded_windows": 1848
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 144,
+      "candidate_windows": 12984,
+      "valid_windows": 10896,
+      "excluded_windows": 2088
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 192,
+      "candidate_windows": 12936,
+      "valid_windows": 10608,
+      "excluded_windows": 2328
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 288,
+      "candidate_windows": 12840,
+      "valid_windows": 10032,
+      "excluded_windows": 2808
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 4,
+      "candidate_windows": 13028,
+      "valid_windows": 11160,
+      "excluded_windows": 1868
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 8,
+      "candidate_windows": 13024,
+      "valid_windows": 11136,
+      "excluded_windows": 1888
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 16,
+      "candidate_windows": 13016,
+      "valid_windows": 11088,
+      "excluded_windows": 1928
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 24,
+      "candidate_windows": 13008,
+      "valid_windows": 11040,
+      "excluded_windows": 1968
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 48,
+      "candidate_windows": 12984,
+      "valid_windows": 10896,
+      "excluded_windows": 2088
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 96,
+      "candidate_windows": 12936,
+      "valid_windows": 10608,
+      "excluded_windows": 2328
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 144,
+      "candidate_windows": 12888,
+      "valid_windows": 10320,
+      "excluded_windows": 2568
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 192,
+      "candidate_windows": 12840,
+      "valid_windows": 10032,
+      "excluded_windows": 2808
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 288,
+      "candidate_windows": 12744,
+      "valid_windows": 9456,
+      "excluded_windows": 3288
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 4,
+      "candidate_windows": 12932,
+      "valid_windows": 10584,
+      "excluded_windows": 2348
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 8,
+      "candidate_windows": 12928,
+      "valid_windows": 10560,
+      "excluded_windows": 2368
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 16,
+      "candidate_windows": 12920,
+      "valid_windows": 10512,
+      "excluded_windows": 2408
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 24,
+      "candidate_windows": 12912,
+      "valid_windows": 10464,
+      "excluded_windows": 2448
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 48,
+      "candidate_windows": 12888,
+      "valid_windows": 10320,
+      "excluded_windows": 2568
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 96,
+      "candidate_windows": 12840,
+      "valid_windows": 10032,
+      "excluded_windows": 2808
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 144,
+      "candidate_windows": 12792,
+      "valid_windows": 9744,
+      "excluded_windows": 3048
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 192,
+      "candidate_windows": 12744,
+      "valid_windows": 9456,
+      "excluded_windows": 3288
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 288,
+      "candidate_windows": 12648,
+      "valid_windows": 8880,
+      "excluded_windows": 3768
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 4,
+      "candidate_windows": 12644,
+      "valid_windows": 8856,
+      "excluded_windows": 3788
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 8,
+      "candidate_windows": 12640,
+      "valid_windows": 8832,
+      "excluded_windows": 3808
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 16,
+      "candidate_windows": 12632,
+      "valid_windows": 8784,
+      "excluded_windows": 3848
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 24,
+      "candidate_windows": 12624,
+      "valid_windows": 8736,
+      "excluded_windows": 3888
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 48,
+      "candidate_windows": 12600,
+      "valid_windows": 8592,
+      "excluded_windows": 4008
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 96,
+      "candidate_windows": 12552,
+      "valid_windows": 8339,
+      "excluded_windows": 4213
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 144,
+      "candidate_windows": 12504,
+      "valid_windows": 8099,
+      "excluded_windows": 4405
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 192,
+      "candidate_windows": 12456,
+      "valid_windows": 7859,
+      "excluded_windows": 4597
+    },
+    {
+      "experiment": "V1",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 288,
+      "candidate_windows": 12360,
+      "valid_windows": 7379,
+      "excluded_windows": 4981
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 4,
+      "candidate_windows": 12813,
+      "valid_windows": 12730,
+      "excluded_windows": 83
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 8,
+      "candidate_windows": 12809,
+      "valid_windows": 12722,
+      "excluded_windows": 87
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 16,
+      "candidate_windows": 12801,
+      "valid_windows": 12706,
+      "excluded_windows": 95
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 24,
+      "candidate_windows": 12793,
+      "valid_windows": 12690,
+      "excluded_windows": 103
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 48,
+      "candidate_windows": 12769,
+      "valid_windows": 12642,
+      "excluded_windows": 127
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 96,
+      "candidate_windows": 12721,
+      "valid_windows": 12546,
+      "excluded_windows": 175
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 144,
+      "candidate_windows": 12673,
+      "valid_windows": 12450,
+      "excluded_windows": 223
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 192,
+      "candidate_windows": 12625,
+      "valid_windows": 12354,
+      "excluded_windows": 271
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 288,
+      "candidate_windows": 12529,
+      "valid_windows": 12162,
+      "excluded_windows": 367
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 4,
+      "candidate_windows": 12765,
+      "valid_windows": 12634,
+      "excluded_windows": 131
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 8,
+      "candidate_windows": 12761,
+      "valid_windows": 12626,
+      "excluded_windows": 135
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 16,
+      "candidate_windows": 12753,
+      "valid_windows": 12610,
+      "excluded_windows": 143
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 24,
+      "candidate_windows": 12745,
+      "valid_windows": 12594,
+      "excluded_windows": 151
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 48,
+      "candidate_windows": 12721,
+      "valid_windows": 12546,
+      "excluded_windows": 175
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 96,
+      "candidate_windows": 12673,
+      "valid_windows": 12450,
+      "excluded_windows": 223
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 144,
+      "candidate_windows": 12625,
+      "valid_windows": 12354,
+      "excluded_windows": 271
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 192,
+      "candidate_windows": 12577,
+      "valid_windows": 12258,
+      "excluded_windows": 319
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 288,
+      "candidate_windows": 12481,
+      "valid_windows": 12066,
+      "excluded_windows": 415
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 4,
+      "candidate_windows": 12669,
+      "valid_windows": 12442,
+      "excluded_windows": 227
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 8,
+      "candidate_windows": 12665,
+      "valid_windows": 12434,
+      "excluded_windows": 231
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 16,
+      "candidate_windows": 12657,
+      "valid_windows": 12418,
+      "excluded_windows": 239
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 24,
+      "candidate_windows": 12649,
+      "valid_windows": 12402,
+      "excluded_windows": 247
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 48,
+      "candidate_windows": 12625,
+      "valid_windows": 12354,
+      "excluded_windows": 271
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 96,
+      "candidate_windows": 12577,
+      "valid_windows": 12258,
+      "excluded_windows": 319
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 144,
+      "candidate_windows": 12529,
+      "valid_windows": 12162,
+      "excluded_windows": 367
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 192,
+      "candidate_windows": 12481,
+      "valid_windows": 12066,
+      "excluded_windows": 415
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 288,
+      "candidate_windows": 12385,
+      "valid_windows": 11874,
+      "excluded_windows": 511
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 4,
+      "candidate_windows": 12573,
+      "valid_windows": 12250,
+      "excluded_windows": 323
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 8,
+      "candidate_windows": 12569,
+      "valid_windows": 12242,
+      "excluded_windows": 327
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 16,
+      "candidate_windows": 12561,
+      "valid_windows": 12226,
+      "excluded_windows": 335
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 24,
+      "candidate_windows": 12553,
+      "valid_windows": 12210,
+      "excluded_windows": 343
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 48,
+      "candidate_windows": 12529,
+      "valid_windows": 12162,
+      "excluded_windows": 367
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 96,
+      "candidate_windows": 12481,
+      "valid_windows": 12066,
+      "excluded_windows": 415
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 144,
+      "candidate_windows": 12433,
+      "valid_windows": 11970,
+      "excluded_windows": 463
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 192,
+      "candidate_windows": 12385,
+      "valid_windows": 11874,
+      "excluded_windows": 511
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 288,
+      "candidate_windows": 12289,
+      "valid_windows": 11682,
+      "excluded_windows": 607
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 4,
+      "candidate_windows": 12477,
+      "valid_windows": 12058,
+      "excluded_windows": 419
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 8,
+      "candidate_windows": 12473,
+      "valid_windows": 12050,
+      "excluded_windows": 423
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 16,
+      "candidate_windows": 12465,
+      "valid_windows": 12034,
+      "excluded_windows": 431
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 24,
+      "candidate_windows": 12457,
+      "valid_windows": 12018,
+      "excluded_windows": 439
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 48,
+      "candidate_windows": 12433,
+      "valid_windows": 11970,
+      "excluded_windows": 463
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 96,
+      "candidate_windows": 12385,
+      "valid_windows": 11874,
+      "excluded_windows": 511
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 144,
+      "candidate_windows": 12337,
+      "valid_windows": 11778,
+      "excluded_windows": 559
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 192,
+      "candidate_windows": 12289,
+      "valid_windows": 11682,
+      "excluded_windows": 607
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 288,
+      "candidate_windows": 12193,
+      "valid_windows": 11490,
+      "excluded_windows": 703
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 4,
+      "candidate_windows": 12189,
+      "valid_windows": 11482,
+      "excluded_windows": 707
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 8,
+      "candidate_windows": 12185,
+      "valid_windows": 11474,
+      "excluded_windows": 711
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 16,
+      "candidate_windows": 12177,
+      "valid_windows": 11458,
+      "excluded_windows": 719
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 24,
+      "candidate_windows": 12169,
+      "valid_windows": 11442,
+      "excluded_windows": 727
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 48,
+      "candidate_windows": 12145,
+      "valid_windows": 11394,
+      "excluded_windows": 751
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 96,
+      "candidate_windows": 12097,
+      "valid_windows": 11298,
+      "excluded_windows": 799
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 144,
+      "candidate_windows": 12049,
+      "valid_windows": 11202,
+      "excluded_windows": 847
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 192,
+      "candidate_windows": 12001,
+      "valid_windows": 11106,
+      "excluded_windows": 895
+    },
+    {
+      "experiment": "V1",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 288,
+      "candidate_windows": 11905,
+      "valid_windows": 10914,
+      "excluded_windows": 991
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 4,
+      "candidate_windows": 62511,
+      "valid_windows": 60877,
+      "excluded_windows": 1634
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 8,
+      "candidate_windows": 62507,
+      "valid_windows": 60761,
+      "excluded_windows": 1746
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 16,
+      "candidate_windows": 62499,
+      "valid_windows": 60529,
+      "excluded_windows": 1970
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 24,
+      "candidate_windows": 62491,
+      "valid_windows": 60297,
+      "excluded_windows": 2194
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 48,
+      "candidate_windows": 62467,
+      "valid_windows": 59601,
+      "excluded_windows": 2866
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 96,
+      "candidate_windows": 62419,
+      "valid_windows": 58305,
+      "excluded_windows": 4114
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 144,
+      "candidate_windows": 62371,
+      "valid_windows": 57071,
+      "excluded_windows": 5300
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 192,
+      "candidate_windows": 62323,
+      "valid_windows": 55871,
+      "excluded_windows": 6452
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 288,
+      "candidate_windows": 62227,
+      "valid_windows": 53505,
+      "excluded_windows": 8722
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 4,
+      "candidate_windows": 62463,
+      "valid_windows": 59440,
+      "excluded_windows": 3023
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 8,
+      "candidate_windows": 62459,
+      "valid_windows": 59330,
+      "excluded_windows": 3129
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 16,
+      "candidate_windows": 62451,
+      "valid_windows": 59114,
+      "excluded_windows": 3337
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 24,
+      "candidate_windows": 62443,
+      "valid_windows": 58898,
+      "excluded_windows": 3545
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 48,
+      "candidate_windows": 62419,
+      "valid_windows": 58257,
+      "excluded_windows": 4162
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 96,
+      "candidate_windows": 62371,
+      "valid_windows": 57023,
+      "excluded_windows": 5348
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 144,
+      "candidate_windows": 62323,
+      "valid_windows": 55823,
+      "excluded_windows": 6500
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 192,
+      "candidate_windows": 62275,
+      "valid_windows": 54623,
+      "excluded_windows": 7652
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 288,
+      "candidate_windows": 62179,
+      "valid_windows": 52305,
+      "excluded_windows": 9874
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 4,
+      "candidate_windows": 62367,
+      "valid_windows": 56827,
+      "excluded_windows": 5540
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 8,
+      "candidate_windows": 62363,
+      "valid_windows": 56727,
+      "excluded_windows": 5636
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 16,
+      "candidate_windows": 62355,
+      "valid_windows": 56527,
+      "excluded_windows": 5828
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 24,
+      "candidate_windows": 62347,
+      "valid_windows": 56327,
+      "excluded_windows": 6020
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 48,
+      "candidate_windows": 62323,
+      "valid_windows": 55727,
+      "excluded_windows": 6596
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 96,
+      "candidate_windows": 62275,
+      "valid_windows": 54527,
+      "excluded_windows": 7748
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 144,
+      "candidate_windows": 62227,
+      "valid_windows": 53361,
+      "excluded_windows": 8866
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 192,
+      "candidate_windows": 62179,
+      "valid_windows": 52209,
+      "excluded_windows": 9970
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 288,
+      "candidate_windows": 62083,
+      "valid_windows": 50013,
+      "excluded_windows": 12070
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 4,
+      "candidate_windows": 62271,
+      "valid_windows": 54331,
+      "excluded_windows": 7940
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 8,
+      "candidate_windows": 62267,
+      "valid_windows": 54231,
+      "excluded_windows": 8036
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 16,
+      "candidate_windows": 62259,
+      "valid_windows": 54033,
+      "excluded_windows": 8226
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 24,
+      "candidate_windows": 62251,
+      "valid_windows": 53841,
+      "excluded_windows": 8410
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 48,
+      "candidate_windows": 62227,
+      "valid_windows": 53265,
+      "excluded_windows": 8962
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 96,
+      "candidate_windows": 62179,
+      "valid_windows": 52113,
+      "excluded_windows": 10066
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 144,
+      "candidate_windows": 62131,
+      "valid_windows": 50978,
+      "excluded_windows": 11153
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 192,
+      "candidate_windows": 62083,
+      "valid_windows": 49917,
+      "excluded_windows": 12166
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 288,
+      "candidate_windows": 61987,
+      "valid_windows": 47935,
+      "excluded_windows": 14052
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 4,
+      "candidate_windows": 62175,
+      "valid_windows": 51921,
+      "excluded_windows": 10254
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 8,
+      "candidate_windows": 62171,
+      "valid_windows": 51825,
+      "excluded_windows": 10346
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 16,
+      "candidate_windows": 62163,
+      "valid_windows": 51633,
+      "excluded_windows": 10530
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 24,
+      "candidate_windows": 62155,
+      "valid_windows": 51441,
+      "excluded_windows": 10714
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 48,
+      "candidate_windows": 62131,
+      "valid_windows": 50882,
+      "excluded_windows": 11249
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 96,
+      "candidate_windows": 62083,
+      "valid_windows": 49821,
+      "excluded_windows": 12262
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 144,
+      "candidate_windows": 62035,
+      "valid_windows": 48778,
+      "excluded_windows": 13257
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 192,
+      "candidate_windows": 61987,
+      "valid_windows": 47839,
+      "excluded_windows": 14148
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 288,
+      "candidate_windows": 61891,
+      "valid_windows": 46146,
+      "excluded_windows": 15745
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 4,
+      "candidate_windows": 61887,
+      "valid_windows": 45790,
+      "excluded_windows": 16097
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 8,
+      "candidate_windows": 61883,
+      "valid_windows": 45722,
+      "excluded_windows": 16161
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 16,
+      "candidate_windows": 61875,
+      "valid_windows": 45586,
+      "excluded_windows": 16289
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 24,
+      "candidate_windows": 61867,
+      "valid_windows": 45450,
+      "excluded_windows": 16417
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 48,
+      "candidate_windows": 61843,
+      "valid_windows": 45042,
+      "excluded_windows": 16801
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 96,
+      "candidate_windows": 61795,
+      "valid_windows": 44244,
+      "excluded_windows": 17551
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 144,
+      "candidate_windows": 61747,
+      "valid_windows": 43476,
+      "excluded_windows": 18271
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 192,
+      "candidate_windows": 61699,
+      "valid_windows": 42745,
+      "excluded_windows": 18954
+    },
+    {
+      "experiment": "V2",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 288,
+      "candidate_windows": 61603,
+      "valid_windows": 41305,
+      "excluded_windows": 20298
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 4,
+      "candidate_windows": 12813,
+      "valid_windows": 12730,
+      "excluded_windows": 83
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 8,
+      "candidate_windows": 12809,
+      "valid_windows": 12722,
+      "excluded_windows": 87
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 16,
+      "candidate_windows": 12801,
+      "valid_windows": 12706,
+      "excluded_windows": 95
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 24,
+      "candidate_windows": 12793,
+      "valid_windows": 12690,
+      "excluded_windows": 103
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 48,
+      "candidate_windows": 12769,
+      "valid_windows": 12642,
+      "excluded_windows": 127
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 96,
+      "candidate_windows": 12721,
+      "valid_windows": 12546,
+      "excluded_windows": 175
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 144,
+      "candidate_windows": 12673,
+      "valid_windows": 12450,
+      "excluded_windows": 223
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 192,
+      "candidate_windows": 12625,
+      "valid_windows": 12354,
+      "excluded_windows": 271
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 288,
+      "candidate_windows": 12529,
+      "valid_windows": 12162,
+      "excluded_windows": 367
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 4,
+      "candidate_windows": 12765,
+      "valid_windows": 12634,
+      "excluded_windows": 131
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 8,
+      "candidate_windows": 12761,
+      "valid_windows": 12626,
+      "excluded_windows": 135
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 16,
+      "candidate_windows": 12753,
+      "valid_windows": 12610,
+      "excluded_windows": 143
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 24,
+      "candidate_windows": 12745,
+      "valid_windows": 12594,
+      "excluded_windows": 151
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 48,
+      "candidate_windows": 12721,
+      "valid_windows": 12546,
+      "excluded_windows": 175
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 96,
+      "candidate_windows": 12673,
+      "valid_windows": 12450,
+      "excluded_windows": 223
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 144,
+      "candidate_windows": 12625,
+      "valid_windows": 12354,
+      "excluded_windows": 271
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 192,
+      "candidate_windows": 12577,
+      "valid_windows": 12258,
+      "excluded_windows": 319
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 288,
+      "candidate_windows": 12481,
+      "valid_windows": 12066,
+      "excluded_windows": 415
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 4,
+      "candidate_windows": 12669,
+      "valid_windows": 12442,
+      "excluded_windows": 227
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 8,
+      "candidate_windows": 12665,
+      "valid_windows": 12434,
+      "excluded_windows": 231
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 16,
+      "candidate_windows": 12657,
+      "valid_windows": 12418,
+      "excluded_windows": 239
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 24,
+      "candidate_windows": 12649,
+      "valid_windows": 12402,
+      "excluded_windows": 247
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 48,
+      "candidate_windows": 12625,
+      "valid_windows": 12354,
+      "excluded_windows": 271
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 96,
+      "candidate_windows": 12577,
+      "valid_windows": 12258,
+      "excluded_windows": 319
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 144,
+      "candidate_windows": 12529,
+      "valid_windows": 12162,
+      "excluded_windows": 367
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 192,
+      "candidate_windows": 12481,
+      "valid_windows": 12066,
+      "excluded_windows": 415
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 288,
+      "candidate_windows": 12385,
+      "valid_windows": 11874,
+      "excluded_windows": 511
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 4,
+      "candidate_windows": 12573,
+      "valid_windows": 12250,
+      "excluded_windows": 323
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 8,
+      "candidate_windows": 12569,
+      "valid_windows": 12242,
+      "excluded_windows": 327
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 16,
+      "candidate_windows": 12561,
+      "valid_windows": 12226,
+      "excluded_windows": 335
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 24,
+      "candidate_windows": 12553,
+      "valid_windows": 12210,
+      "excluded_windows": 343
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 48,
+      "candidate_windows": 12529,
+      "valid_windows": 12162,
+      "excluded_windows": 367
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 96,
+      "candidate_windows": 12481,
+      "valid_windows": 12066,
+      "excluded_windows": 415
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 144,
+      "candidate_windows": 12433,
+      "valid_windows": 11970,
+      "excluded_windows": 463
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 192,
+      "candidate_windows": 12385,
+      "valid_windows": 11874,
+      "excluded_windows": 511
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 288,
+      "candidate_windows": 12289,
+      "valid_windows": 11682,
+      "excluded_windows": 607
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 4,
+      "candidate_windows": 12477,
+      "valid_windows": 12058,
+      "excluded_windows": 419
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 8,
+      "candidate_windows": 12473,
+      "valid_windows": 12050,
+      "excluded_windows": 423
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 16,
+      "candidate_windows": 12465,
+      "valid_windows": 12034,
+      "excluded_windows": 431
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 24,
+      "candidate_windows": 12457,
+      "valid_windows": 12018,
+      "excluded_windows": 439
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 48,
+      "candidate_windows": 12433,
+      "valid_windows": 11970,
+      "excluded_windows": 463
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 96,
+      "candidate_windows": 12385,
+      "valid_windows": 11874,
+      "excluded_windows": 511
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 144,
+      "candidate_windows": 12337,
+      "valid_windows": 11778,
+      "excluded_windows": 559
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 192,
+      "candidate_windows": 12289,
+      "valid_windows": 11682,
+      "excluded_windows": 607
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 288,
+      "candidate_windows": 12193,
+      "valid_windows": 11490,
+      "excluded_windows": 703
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 4,
+      "candidate_windows": 12189,
+      "valid_windows": 11482,
+      "excluded_windows": 707
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 8,
+      "candidate_windows": 12185,
+      "valid_windows": 11474,
+      "excluded_windows": 711
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 16,
+      "candidate_windows": 12177,
+      "valid_windows": 11458,
+      "excluded_windows": 719
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 24,
+      "candidate_windows": 12169,
+      "valid_windows": 11442,
+      "excluded_windows": 727
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 48,
+      "candidate_windows": 12145,
+      "valid_windows": 11394,
+      "excluded_windows": 751
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 96,
+      "candidate_windows": 12097,
+      "valid_windows": 11298,
+      "excluded_windows": 799
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 144,
+      "candidate_windows": 12049,
+      "valid_windows": 11202,
+      "excluded_windows": 847
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 192,
+      "candidate_windows": 12001,
+      "valid_windows": 11106,
+      "excluded_windows": 895
+    },
+    {
+      "experiment": "V2",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 288,
+      "candidate_windows": 11905,
+      "valid_windows": 10914,
+      "excluded_windows": 991
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 4,
+      "candidate_windows": 13268,
+      "valid_windows": 12737,
+      "excluded_windows": 531
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 8,
+      "candidate_windows": 13264,
+      "valid_windows": 12701,
+      "excluded_windows": 563
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 16,
+      "candidate_windows": 13256,
+      "valid_windows": 12629,
+      "excluded_windows": 627
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 24,
+      "candidate_windows": 13248,
+      "valid_windows": 12561,
+      "excluded_windows": 687
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 48,
+      "candidate_windows": 13224,
+      "valid_windows": 12372,
+      "excluded_windows": 852
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 96,
+      "candidate_windows": 13176,
+      "valid_windows": 12079,
+      "excluded_windows": 1097
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 144,
+      "candidate_windows": 13128,
+      "valid_windows": 11760,
+      "excluded_windows": 1368
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 192,
+      "candidate_windows": 13080,
+      "valid_windows": 11472,
+      "excluded_windows": 1608
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 288,
+      "candidate_windows": 12984,
+      "valid_windows": 10896,
+      "excluded_windows": 2088
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 4,
+      "candidate_windows": 13220,
+      "valid_windows": 12313,
+      "excluded_windows": 907
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 8,
+      "candidate_windows": 13216,
+      "valid_windows": 12288,
+      "excluded_windows": 928
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 16,
+      "candidate_windows": 13208,
+      "valid_windows": 12240,
+      "excluded_windows": 968
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 24,
+      "candidate_windows": 13200,
+      "valid_windows": 12192,
+      "excluded_windows": 1008
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 48,
+      "candidate_windows": 13176,
+      "valid_windows": 12048,
+      "excluded_windows": 1128
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 96,
+      "candidate_windows": 13128,
+      "valid_windows": 11760,
+      "excluded_windows": 1368
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 144,
+      "candidate_windows": 13080,
+      "valid_windows": 11472,
+      "excluded_windows": 1608
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 192,
+      "candidate_windows": 13032,
+      "valid_windows": 11184,
+      "excluded_windows": 1848
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 288,
+      "candidate_windows": 12936,
+      "valid_windows": 10608,
+      "excluded_windows": 2328
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 4,
+      "candidate_windows": 13124,
+      "valid_windows": 11736,
+      "excluded_windows": 1388
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 8,
+      "candidate_windows": 13120,
+      "valid_windows": 11712,
+      "excluded_windows": 1408
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 16,
+      "candidate_windows": 13112,
+      "valid_windows": 11664,
+      "excluded_windows": 1448
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 24,
+      "candidate_windows": 13104,
+      "valid_windows": 11616,
+      "excluded_windows": 1488
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 48,
+      "candidate_windows": 13080,
+      "valid_windows": 11472,
+      "excluded_windows": 1608
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 96,
+      "candidate_windows": 13032,
+      "valid_windows": 11184,
+      "excluded_windows": 1848
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 144,
+      "candidate_windows": 12984,
+      "valid_windows": 10896,
+      "excluded_windows": 2088
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 192,
+      "candidate_windows": 12936,
+      "valid_windows": 10608,
+      "excluded_windows": 2328
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 288,
+      "candidate_windows": 12840,
+      "valid_windows": 10032,
+      "excluded_windows": 2808
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 4,
+      "candidate_windows": 13028,
+      "valid_windows": 11160,
+      "excluded_windows": 1868
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 8,
+      "candidate_windows": 13024,
+      "valid_windows": 11136,
+      "excluded_windows": 1888
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 16,
+      "candidate_windows": 13016,
+      "valid_windows": 11088,
+      "excluded_windows": 1928
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 24,
+      "candidate_windows": 13008,
+      "valid_windows": 11040,
+      "excluded_windows": 1968
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 48,
+      "candidate_windows": 12984,
+      "valid_windows": 10896,
+      "excluded_windows": 2088
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 96,
+      "candidate_windows": 12936,
+      "valid_windows": 10608,
+      "excluded_windows": 2328
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 144,
+      "candidate_windows": 12888,
+      "valid_windows": 10320,
+      "excluded_windows": 2568
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 192,
+      "candidate_windows": 12840,
+      "valid_windows": 10032,
+      "excluded_windows": 2808
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 288,
+      "candidate_windows": 12744,
+      "valid_windows": 9456,
+      "excluded_windows": 3288
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 4,
+      "candidate_windows": 12932,
+      "valid_windows": 10584,
+      "excluded_windows": 2348
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 8,
+      "candidate_windows": 12928,
+      "valid_windows": 10560,
+      "excluded_windows": 2368
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 16,
+      "candidate_windows": 12920,
+      "valid_windows": 10512,
+      "excluded_windows": 2408
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 24,
+      "candidate_windows": 12912,
+      "valid_windows": 10464,
+      "excluded_windows": 2448
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 48,
+      "candidate_windows": 12888,
+      "valid_windows": 10320,
+      "excluded_windows": 2568
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 96,
+      "candidate_windows": 12840,
+      "valid_windows": 10032,
+      "excluded_windows": 2808
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 144,
+      "candidate_windows": 12792,
+      "valid_windows": 9744,
+      "excluded_windows": 3048
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 192,
+      "candidate_windows": 12744,
+      "valid_windows": 9456,
+      "excluded_windows": 3288
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 288,
+      "candidate_windows": 12648,
+      "valid_windows": 8880,
+      "excluded_windows": 3768
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 4,
+      "candidate_windows": 12644,
+      "valid_windows": 8856,
+      "excluded_windows": 3788
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 8,
+      "candidate_windows": 12640,
+      "valid_windows": 8832,
+      "excluded_windows": 3808
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 16,
+      "candidate_windows": 12632,
+      "valid_windows": 8784,
+      "excluded_windows": 3848
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 24,
+      "candidate_windows": 12624,
+      "valid_windows": 8736,
+      "excluded_windows": 3888
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 48,
+      "candidate_windows": 12600,
+      "valid_windows": 8592,
+      "excluded_windows": 4008
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 96,
+      "candidate_windows": 12552,
+      "valid_windows": 8339,
+      "excluded_windows": 4213
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 144,
+      "candidate_windows": 12504,
+      "valid_windows": 8099,
+      "excluded_windows": 4405
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 192,
+      "candidate_windows": 12456,
+      "valid_windows": 7859,
+      "excluded_windows": 4597
+    },
+    {
+      "experiment": "V2",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 288,
+      "candidate_windows": 12360,
+      "valid_windows": 7379,
+      "excluded_windows": 4981
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 4,
+      "candidate_windows": 62966,
+      "valid_windows": 60853,
+      "excluded_windows": 2113
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 8,
+      "candidate_windows": 62962,
+      "valid_windows": 60709,
+      "excluded_windows": 2253
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 16,
+      "candidate_windows": 62954,
+      "valid_windows": 60421,
+      "excluded_windows": 2533
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 24,
+      "candidate_windows": 62946,
+      "valid_windows": 60137,
+      "excluded_windows": 2809
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 48,
+      "candidate_windows": 62922,
+      "valid_windows": 59300,
+      "excluded_windows": 3622
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 96,
+      "candidate_windows": 62874,
+      "valid_windows": 57807,
+      "excluded_windows": 5067
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 144,
+      "candidate_windows": 62826,
+      "valid_windows": 56367,
+      "excluded_windows": 6459
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 192,
+      "candidate_windows": 62778,
+      "valid_windows": 55023,
+      "excluded_windows": 7755
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 48,
+      "horizon_steps": 288,
+      "candidate_windows": 62682,
+      "valid_windows": 52369,
+      "excluded_windows": 10313
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 4,
+      "candidate_windows": 62918,
+      "valid_windows": 59088,
+      "excluded_windows": 3830
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 8,
+      "candidate_windows": 62914,
+      "valid_windows": 58961,
+      "excluded_windows": 3953
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 16,
+      "candidate_windows": 62906,
+      "valid_windows": 58713,
+      "excluded_windows": 4193
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 24,
+      "candidate_windows": 62898,
+      "valid_windows": 58465,
+      "excluded_windows": 4433
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 48,
+      "candidate_windows": 62874,
+      "valid_windows": 57728,
+      "excluded_windows": 5146
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 96,
+      "candidate_windows": 62826,
+      "valid_windows": 56319,
+      "excluded_windows": 6507
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 144,
+      "candidate_windows": 62778,
+      "valid_windows": 54975,
+      "excluded_windows": 7803
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 192,
+      "candidate_windows": 62730,
+      "valid_windows": 53631,
+      "excluded_windows": 9099
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 96,
+      "horizon_steps": 288,
+      "candidate_windows": 62634,
+      "valid_windows": 51025,
+      "excluded_windows": 11609
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 4,
+      "candidate_windows": 62822,
+      "valid_windows": 56111,
+      "excluded_windows": 6711
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 8,
+      "candidate_windows": 62818,
+      "valid_windows": 55999,
+      "excluded_windows": 6819
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 16,
+      "candidate_windows": 62810,
+      "valid_windows": 55775,
+      "excluded_windows": 7035
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 24,
+      "candidate_windows": 62802,
+      "valid_windows": 55551,
+      "excluded_windows": 7251
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 48,
+      "candidate_windows": 62778,
+      "valid_windows": 54879,
+      "excluded_windows": 7899
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 96,
+      "candidate_windows": 62730,
+      "valid_windows": 53535,
+      "excluded_windows": 9195
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 144,
+      "candidate_windows": 62682,
+      "valid_windows": 52225,
+      "excluded_windows": 10457
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 192,
+      "candidate_windows": 62634,
+      "valid_windows": 50929,
+      "excluded_windows": 11705
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 192,
+      "horizon_steps": 288,
+      "candidate_windows": 62538,
+      "valid_windows": 48445,
+      "excluded_windows": 14093
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 4,
+      "candidate_windows": 62726,
+      "valid_windows": 53327,
+      "excluded_windows": 9399
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 8,
+      "candidate_windows": 62722,
+      "valid_windows": 53215,
+      "excluded_windows": 9507
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 16,
+      "candidate_windows": 62714,
+      "valid_windows": 52993,
+      "excluded_windows": 9721
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 24,
+      "candidate_windows": 62706,
+      "valid_windows": 52777,
+      "excluded_windows": 9929
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 48,
+      "candidate_windows": 62682,
+      "valid_windows": 52129,
+      "excluded_windows": 10553
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 96,
+      "candidate_windows": 62634,
+      "valid_windows": 50833,
+      "excluded_windows": 11801
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 144,
+      "candidate_windows": 62586,
+      "valid_windows": 49554,
+      "excluded_windows": 13032
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 192,
+      "candidate_windows": 62538,
+      "valid_windows": 48349,
+      "excluded_windows": 14189
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 288,
+      "horizon_steps": 288,
+      "candidate_windows": 62442,
+      "valid_windows": 46079,
+      "excluded_windows": 16363
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 4,
+      "candidate_windows": 62630,
+      "valid_windows": 50629,
+      "excluded_windows": 12001
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 8,
+      "candidate_windows": 62626,
+      "valid_windows": 50521,
+      "excluded_windows": 12105
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 16,
+      "candidate_windows": 62618,
+      "valid_windows": 50305,
+      "excluded_windows": 12313
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 24,
+      "candidate_windows": 62610,
+      "valid_windows": 50089,
+      "excluded_windows": 12521
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 48,
+      "candidate_windows": 62586,
+      "valid_windows": 49458,
+      "excluded_windows": 13128
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 96,
+      "candidate_windows": 62538,
+      "valid_windows": 48253,
+      "excluded_windows": 14285
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 144,
+      "candidate_windows": 62490,
+      "valid_windows": 47066,
+      "excluded_windows": 15424
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 192,
+      "candidate_windows": 62442,
+      "valid_windows": 45983,
+      "excluded_windows": 16459
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 384,
+      "horizon_steps": 288,
+      "candidate_windows": 62346,
+      "valid_windows": 44002,
+      "excluded_windows": 18344
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 4,
+      "candidate_windows": 62342,
+      "valid_windows": 43634,
+      "excluded_windows": 18708
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 8,
+      "candidate_windows": 62338,
+      "valid_windows": 43554,
+      "excluded_windows": 18784
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 16,
+      "candidate_windows": 62330,
+      "valid_windows": 43394,
+      "excluded_windows": 18936
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 24,
+      "candidate_windows": 62322,
+      "valid_windows": 43234,
+      "excluded_windows": 19088
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 48,
+      "candidate_windows": 62298,
+      "valid_windows": 42754,
+      "excluded_windows": 19544
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 96,
+      "candidate_windows": 62250,
+      "valid_windows": 41847,
+      "excluded_windows": 20403
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 144,
+      "candidate_windows": 62202,
+      "valid_windows": 40983,
+      "excluded_windows": 21219
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 192,
+      "candidate_windows": 62154,
+      "valid_windows": 40156,
+      "excluded_windows": 21998
+    },
+    {
+      "experiment": "V3",
+      "partition": "train",
+      "lookback_steps": 672,
+      "horizon_steps": 288,
+      "candidate_windows": 62058,
+      "valid_windows": 38524,
+      "excluded_windows": 23534
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 4,
+      "candidate_windows": 12813,
+      "valid_windows": 12730,
+      "excluded_windows": 83
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 8,
+      "candidate_windows": 12809,
+      "valid_windows": 12722,
+      "excluded_windows": 87
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 16,
+      "candidate_windows": 12801,
+      "valid_windows": 12706,
+      "excluded_windows": 95
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 24,
+      "candidate_windows": 12793,
+      "valid_windows": 12690,
+      "excluded_windows": 103
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 48,
+      "candidate_windows": 12769,
+      "valid_windows": 12642,
+      "excluded_windows": 127
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 96,
+      "candidate_windows": 12721,
+      "valid_windows": 12546,
+      "excluded_windows": 175
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 144,
+      "candidate_windows": 12673,
+      "valid_windows": 12450,
+      "excluded_windows": 223
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 192,
+      "candidate_windows": 12625,
+      "valid_windows": 12354,
+      "excluded_windows": 271
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 48,
+      "horizon_steps": 288,
+      "candidate_windows": 12529,
+      "valid_windows": 12162,
+      "excluded_windows": 367
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 4,
+      "candidate_windows": 12765,
+      "valid_windows": 12634,
+      "excluded_windows": 131
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 8,
+      "candidate_windows": 12761,
+      "valid_windows": 12626,
+      "excluded_windows": 135
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 16,
+      "candidate_windows": 12753,
+      "valid_windows": 12610,
+      "excluded_windows": 143
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 24,
+      "candidate_windows": 12745,
+      "valid_windows": 12594,
+      "excluded_windows": 151
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 48,
+      "candidate_windows": 12721,
+      "valid_windows": 12546,
+      "excluded_windows": 175
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 96,
+      "candidate_windows": 12673,
+      "valid_windows": 12450,
+      "excluded_windows": 223
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 144,
+      "candidate_windows": 12625,
+      "valid_windows": 12354,
+      "excluded_windows": 271
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 192,
+      "candidate_windows": 12577,
+      "valid_windows": 12258,
+      "excluded_windows": 319
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 96,
+      "horizon_steps": 288,
+      "candidate_windows": 12481,
+      "valid_windows": 12066,
+      "excluded_windows": 415
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 4,
+      "candidate_windows": 12669,
+      "valid_windows": 12442,
+      "excluded_windows": 227
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 8,
+      "candidate_windows": 12665,
+      "valid_windows": 12434,
+      "excluded_windows": 231
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 16,
+      "candidate_windows": 12657,
+      "valid_windows": 12418,
+      "excluded_windows": 239
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 24,
+      "candidate_windows": 12649,
+      "valid_windows": 12402,
+      "excluded_windows": 247
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 48,
+      "candidate_windows": 12625,
+      "valid_windows": 12354,
+      "excluded_windows": 271
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 96,
+      "candidate_windows": 12577,
+      "valid_windows": 12258,
+      "excluded_windows": 319
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 144,
+      "candidate_windows": 12529,
+      "valid_windows": 12162,
+      "excluded_windows": 367
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 192,
+      "candidate_windows": 12481,
+      "valid_windows": 12066,
+      "excluded_windows": 415
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 192,
+      "horizon_steps": 288,
+      "candidate_windows": 12385,
+      "valid_windows": 11874,
+      "excluded_windows": 511
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 4,
+      "candidate_windows": 12573,
+      "valid_windows": 12250,
+      "excluded_windows": 323
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 8,
+      "candidate_windows": 12569,
+      "valid_windows": 12242,
+      "excluded_windows": 327
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 16,
+      "candidate_windows": 12561,
+      "valid_windows": 12226,
+      "excluded_windows": 335
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 24,
+      "candidate_windows": 12553,
+      "valid_windows": 12210,
+      "excluded_windows": 343
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 48,
+      "candidate_windows": 12529,
+      "valid_windows": 12162,
+      "excluded_windows": 367
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 96,
+      "candidate_windows": 12481,
+      "valid_windows": 12066,
+      "excluded_windows": 415
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 144,
+      "candidate_windows": 12433,
+      "valid_windows": 11970,
+      "excluded_windows": 463
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 192,
+      "candidate_windows": 12385,
+      "valid_windows": 11874,
+      "excluded_windows": 511
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 288,
+      "horizon_steps": 288,
+      "candidate_windows": 12289,
+      "valid_windows": 11682,
+      "excluded_windows": 607
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 4,
+      "candidate_windows": 12477,
+      "valid_windows": 12058,
+      "excluded_windows": 419
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 8,
+      "candidate_windows": 12473,
+      "valid_windows": 12050,
+      "excluded_windows": 423
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 16,
+      "candidate_windows": 12465,
+      "valid_windows": 12034,
+      "excluded_windows": 431
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 24,
+      "candidate_windows": 12457,
+      "valid_windows": 12018,
+      "excluded_windows": 439
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 48,
+      "candidate_windows": 12433,
+      "valid_windows": 11970,
+      "excluded_windows": 463
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 96,
+      "candidate_windows": 12385,
+      "valid_windows": 11874,
+      "excluded_windows": 511
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 144,
+      "candidate_windows": 12337,
+      "valid_windows": 11778,
+      "excluded_windows": 559
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 192,
+      "candidate_windows": 12289,
+      "valid_windows": 11682,
+      "excluded_windows": 607
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 384,
+      "horizon_steps": 288,
+      "candidate_windows": 12193,
+      "valid_windows": 11490,
+      "excluded_windows": 703
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 4,
+      "candidate_windows": 12189,
+      "valid_windows": 11482,
+      "excluded_windows": 707
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 8,
+      "candidate_windows": 12185,
+      "valid_windows": 11474,
+      "excluded_windows": 711
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 16,
+      "candidate_windows": 12177,
+      "valid_windows": 11458,
+      "excluded_windows": 719
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 24,
+      "candidate_windows": 12169,
+      "valid_windows": 11442,
+      "excluded_windows": 727
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 48,
+      "candidate_windows": 12145,
+      "valid_windows": 11394,
+      "excluded_windows": 751
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 96,
+      "candidate_windows": 12097,
+      "valid_windows": 11298,
+      "excluded_windows": 799
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 144,
+      "candidate_windows": 12049,
+      "valid_windows": 11202,
+      "excluded_windows": 847
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 192,
+      "candidate_windows": 12001,
+      "valid_windows": 11106,
+      "excluded_windows": 895
+    },
+    {
+      "experiment": "V3",
+      "partition": "validation",
+      "lookback_steps": 672,
+      "horizon_steps": 288,
+      "candidate_windows": 11905,
+      "valid_windows": 10914,
+      "excluded_windows": 991
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 4,
+      "candidate_windows": 12813,
+      "valid_windows": 12761,
+      "excluded_windows": 52
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 8,
+      "candidate_windows": 12809,
+      "valid_windows": 12753,
+      "excluded_windows": 56
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 16,
+      "candidate_windows": 12801,
+      "valid_windows": 12737,
+      "excluded_windows": 64
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 24,
+      "candidate_windows": 12793,
+      "valid_windows": 12721,
+      "excluded_windows": 72
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 48,
+      "candidate_windows": 12769,
+      "valid_windows": 12673,
+      "excluded_windows": 96
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 96,
+      "candidate_windows": 12721,
+      "valid_windows": 12577,
+      "excluded_windows": 144
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 144,
+      "candidate_windows": 12673,
+      "valid_windows": 12481,
+      "excluded_windows": 192
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 192,
+      "candidate_windows": 12625,
+      "valid_windows": 12385,
+      "excluded_windows": 240
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 48,
+      "horizon_steps": 288,
+      "candidate_windows": 12529,
+      "valid_windows": 12193,
+      "excluded_windows": 336
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 4,
+      "candidate_windows": 12765,
+      "valid_windows": 12665,
+      "excluded_windows": 100
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 8,
+      "candidate_windows": 12761,
+      "valid_windows": 12657,
+      "excluded_windows": 104
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 16,
+      "candidate_windows": 12753,
+      "valid_windows": 12641,
+      "excluded_windows": 112
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 24,
+      "candidate_windows": 12745,
+      "valid_windows": 12625,
+      "excluded_windows": 120
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 48,
+      "candidate_windows": 12721,
+      "valid_windows": 12577,
+      "excluded_windows": 144
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 96,
+      "candidate_windows": 12673,
+      "valid_windows": 12481,
+      "excluded_windows": 192
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 144,
+      "candidate_windows": 12625,
+      "valid_windows": 12385,
+      "excluded_windows": 240
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 192,
+      "candidate_windows": 12577,
+      "valid_windows": 12289,
+      "excluded_windows": 288
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 96,
+      "horizon_steps": 288,
+      "candidate_windows": 12481,
+      "valid_windows": 12097,
+      "excluded_windows": 384
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 4,
+      "candidate_windows": 12669,
+      "valid_windows": 12473,
+      "excluded_windows": 196
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 8,
+      "candidate_windows": 12665,
+      "valid_windows": 12465,
+      "excluded_windows": 200
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 16,
+      "candidate_windows": 12657,
+      "valid_windows": 12449,
+      "excluded_windows": 208
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 24,
+      "candidate_windows": 12649,
+      "valid_windows": 12433,
+      "excluded_windows": 216
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 48,
+      "candidate_windows": 12625,
+      "valid_windows": 12385,
+      "excluded_windows": 240
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 96,
+      "candidate_windows": 12577,
+      "valid_windows": 12289,
+      "excluded_windows": 288
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 144,
+      "candidate_windows": 12529,
+      "valid_windows": 12193,
+      "excluded_windows": 336
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 192,
+      "candidate_windows": 12481,
+      "valid_windows": 12097,
+      "excluded_windows": 384
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 192,
+      "horizon_steps": 288,
+      "candidate_windows": 12385,
+      "valid_windows": 11905,
+      "excluded_windows": 480
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 4,
+      "candidate_windows": 12573,
+      "valid_windows": 12281,
+      "excluded_windows": 292
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 8,
+      "candidate_windows": 12569,
+      "valid_windows": 12273,
+      "excluded_windows": 296
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 16,
+      "candidate_windows": 12561,
+      "valid_windows": 12257,
+      "excluded_windows": 304
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 24,
+      "candidate_windows": 12553,
+      "valid_windows": 12241,
+      "excluded_windows": 312
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 48,
+      "candidate_windows": 12529,
+      "valid_windows": 12193,
+      "excluded_windows": 336
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 96,
+      "candidate_windows": 12481,
+      "valid_windows": 12097,
+      "excluded_windows": 384
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 144,
+      "candidate_windows": 12433,
+      "valid_windows": 12001,
+      "excluded_windows": 432
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 192,
+      "candidate_windows": 12385,
+      "valid_windows": 11905,
+      "excluded_windows": 480
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 288,
+      "horizon_steps": 288,
+      "candidate_windows": 12289,
+      "valid_windows": 11713,
+      "excluded_windows": 576
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 4,
+      "candidate_windows": 12477,
+      "valid_windows": 12089,
+      "excluded_windows": 388
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 8,
+      "candidate_windows": 12473,
+      "valid_windows": 12081,
+      "excluded_windows": 392
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 16,
+      "candidate_windows": 12465,
+      "valid_windows": 12065,
+      "excluded_windows": 400
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 24,
+      "candidate_windows": 12457,
+      "valid_windows": 12049,
+      "excluded_windows": 408
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 48,
+      "candidate_windows": 12433,
+      "valid_windows": 12001,
+      "excluded_windows": 432
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 96,
+      "candidate_windows": 12385,
+      "valid_windows": 11905,
+      "excluded_windows": 480
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 144,
+      "candidate_windows": 12337,
+      "valid_windows": 11809,
+      "excluded_windows": 528
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 192,
+      "candidate_windows": 12289,
+      "valid_windows": 11713,
+      "excluded_windows": 576
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 384,
+      "horizon_steps": 288,
+      "candidate_windows": 12193,
+      "valid_windows": 11521,
+      "excluded_windows": 672
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 4,
+      "candidate_windows": 12189,
+      "valid_windows": 11513,
+      "excluded_windows": 676
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 8,
+      "candidate_windows": 12185,
+      "valid_windows": 11505,
+      "excluded_windows": 680
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 16,
+      "candidate_windows": 12177,
+      "valid_windows": 11489,
+      "excluded_windows": 688
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 24,
+      "candidate_windows": 12169,
+      "valid_windows": 11473,
+      "excluded_windows": 696
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 48,
+      "candidate_windows": 12145,
+      "valid_windows": 11425,
+      "excluded_windows": 720
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 96,
+      "candidate_windows": 12097,
+      "valid_windows": 11329,
+      "excluded_windows": 768
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 144,
+      "candidate_windows": 12049,
+      "valid_windows": 11233,
+      "excluded_windows": 816
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 192,
+      "candidate_windows": 12001,
+      "valid_windows": 11137,
+      "excluded_windows": 864
+    },
+    {
+      "experiment": "V3",
+      "partition": "test",
+      "lookback_steps": 672,
+      "horizon_steps": 288,
+      "candidate_windows": 11905,
+      "valid_windows": 10945,
+      "excluded_windows": 960
+    }
+  ],
+  "caveat": "This is a feasibility calculation, not an implementation or execution of models, and does not verify the code in either repository."
+}
