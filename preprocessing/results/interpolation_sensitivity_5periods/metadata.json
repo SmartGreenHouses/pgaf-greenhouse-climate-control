@@ -1,0 +1,73 @@
+{
+  "study_type": "retrospective synthetic masking / interpolation sensitivity; no forecasting",
+  "input": "ETIFA_clean.csv",
+  "input_sha256": "62a37ecf7c490089ba3f3fd6b74fcd8cc384b8d26b5d9fc663de91494d9e8ae7",
+  "script_sha256": "b342e89eda82328e5c6103f0455bfb5b8b8baf56150f8c17cc57f3e5250fb95f",
+  "periods": [
+    {
+      "id": "P1_spring_2019",
+      "start": "2019-05-01T00:00:00Z",
+      "end": "2019-05-31T23:45:00Z"
+    },
+    {
+      "id": "P2_summer_2019",
+      "start": "2019-07-01T00:00:00Z",
+      "end": "2019-08-31T23:45:00Z"
+    },
+    {
+      "id": "P3_autumn_2019",
+      "start": "2019-10-01T00:00:00Z",
+      "end": "2019-11-30T23:45:00Z"
+    },
+    {
+      "id": "P4_winter_2020",
+      "start": "2020-01-01T00:00:00Z",
+      "end": "2020-02-29T23:45:00Z"
+    },
+    {
+      "id": "P5_autumn_2020",
+      "start": "2020-09-01T00:00:00Z",
+      "end": "2020-10-31T23:45:00Z"
+    }
+  ],
+  "source_subset": "V1 TRAIN only; no validation/test periods",
+  "gaps_minutes": [
+    15,
+    30,
+    45,
+    60,
+    75,
+    90,
+    105,
+    120
+  ],
+  "max_production_interpolation_minutes": 60,
+  "stress_test_only_minutes": [
+    75,
+    90,
+    105,
+    120
+  ],
+  "seeds": [
+    20261117,
+    20261118,
+    20261119
+  ],
+  "max_nonoverlapping_windows_per_var_period_gap_seed": 120,
+  "bootstrap_repetitions": 500,
+  "windows_disjoint_within_configuration": true,
+  "windows_can_overlap_across_seeds_variables_and_durations": true,
+  "aggregation": "mean across seeds within each period, then equal-weight mean across five periods; no false independent pooling of seeds",
+  "critical_caveats": [
+    "Ground truth is QC-retained observed data BEFORE imputation. Synthetic missingness differs from real outages.",
+    "Interpolation is retrospective and has observed values on BOTH sides of each hidden gap.",
+    "DH-only case leaves TBS and RH observed at missing DH points; coupled case hides all three simultaneously.",
+    "Magnus uses ETIFA preprocessing formula; original DH is highly consistent with this derived metric, so the comparison is not independent formula validation.",
+    "Actual preprocessing also performs a subsequent psychrometric coherence rejection pass, NOT simulated here.",
+    "Circular wind interpolation follows shortest arc and excludes exactly opposite endpoints (180 deg); even correct circular geometry may have high error.",
+    "Wind and scalar errors are reported in their respective units; do not pool across variables.",
+    "Five logged actuator-state variables are forward-filled in production (not evaluated in this continuous interpolation study).",
+    "These tests do NOT assess downstream forecasting or GA efficacy.",
+    "Window-level bootstrap CIs are descriptive within each seed/period and cannot turn repeated seeds into independent temporal datasets."
+  ]
+}

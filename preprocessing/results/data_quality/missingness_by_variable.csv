@@ -1,0 +1,16 @@
+variable,type,original_missing,original_missing_pct,invalidated,missing_after_cleaning,reconstructed,final_missing,final_missing_pct
+dry_bulb_temperature,sensor,6472,6.416434,23,6495,3352,3143,3.116015
+wet_bulb_temperature,sensor,6179,6.125949,84,6263,3129,3134,3.107093
+relative_humidity,sensor,7090,7.029128,71,7161,4655,2506,2.484484
+humidity_deficit,sensor,3170,3.142783,54,3224,221,3003,2.977217
+outdoor_temperature,sensor,4503,4.464339,33,4536,2254,2282,2.262408
+outdoor_relative_humidity,sensor,15085,14.955485,4,15089,12802,2287,2.267365
+wind_speed,sensor,12511,12.403585,0,12511,10228,2283,2.263399
+wind_direction,sensor,7804,7.736998,0,7804,5528,2276,2.256459
+radiation,sensor,28403,28.159142,0,28403,26079,2324,2.304047
+pipe_temperature,actuator_related,2533,2.511253,0,2533,213,2320,2.300081
+humidification,actuator_related,62500,61.963397,0,62500,62500,0,0.0
+window_1_position,actuator_related,49222,48.799397,0,49222,49222,0,0.0
+window_2_position,actuator_related,54371,53.90419,0,54371,54371,0,0.0
+screen_1_position,actuator_related,58364,57.862907,0,58364,58364,0,0.0
+screen_2_position,actuator_related,58409,57.907521,0,58409,58409,0,0.0

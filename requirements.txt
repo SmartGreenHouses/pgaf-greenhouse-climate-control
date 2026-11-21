@@ -1,4 +1,0 @@
-# Imported third-party packages; exact versions pending verification.
-numpy
-pandas
-torch

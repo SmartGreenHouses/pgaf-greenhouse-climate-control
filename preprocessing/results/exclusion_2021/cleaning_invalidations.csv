@@ -1,0 +1,9 @@
+period,rule,invalidated_cells
+excluded_2021,isolated_spike,70
+excluded_2021,sensor_box_contradiction,126
+excluded_2021,temperature_equals_minus_5,23
+excluded_2021,wet_bulb_above_dry_bulb,4
+retained_combined,isolated_spike,7
+retained_combined,out_of_physical_range,1
+retained_combined,sensor_box_contradiction,36
+retained_combined,wet_bulb_above_dry_bulb,2

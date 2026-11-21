@@ -1,0 +1,12 @@
+{
+  "script_sha256": "913d97c718125a5bb1e611a575bf46edaad4a0078407dedc104b2d599185ceac",
+  "clean_sha256": "62a37ecf7c490089ba3f3fd6b74fcd8cc384b8d26b5d9fc663de91494d9e8ae7",
+  "imputed_sha256": "3d74ad9113a9b35a03059786eeeb007119bd7107de6b74eb346625a65673dc15",
+  "cleaning_audit_sha256": "5cdecd46f5c54e046a4a38a110bb1e53aaa07fcdbf9dd2010ea848bcb02e0d36",
+  "historical_exclusion": {
+    "start_utc": "2021-06-27T17:45:00+00:00",
+    "end_utc": "2021-10-31T23:45:00+00:00"
+  },
+  "warning": "Cutoffs taken from established splits; not automatically inferred.",
+  "device_failure_diagnosis": "not performed"
+}

@@ -1,0 +1,4 @@
+period,first_utc,last_utc,rows,rows_any_missing,rows_any_missing_pct,rows_all_nine_sensors_missing,missing_cells
+retained_experimental_periods,2019-04-29T07:30:00+00:00,2022-03-14T23:45:00+00:00,88745,251,0.28283283565271283,51,950
+excluded_2021_gap_period,2021-06-27T17:45:00+00:00,2021-10-31T23:45:00+00:00,12121,3177,26.21070868740203,2146,24608
+all_curated_data,2019-04-29T07:30:00+00:00,2022-03-14T23:45:00+00:00,100866,3428,3.398568397676125,2197,25558

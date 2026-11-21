@@ -1,0 +1,35 @@
+{
+  "audit_script_sha256": "f6c746bc486875540cb3cde6166381281da6bba49af6670f7e905a506477c5a1",
+  "raw_rows": 114048,
+  "initially_trimmed_rows": 13182,
+  "curated_rows": 100866,
+  "variables": 15,
+  "cell_counts": {
+    "original_missing": 376616,
+    "invalidated": 269,
+    "missing_after_cleaning": 376885,
+    "reconstructed": 351327,
+    "final_missing": 25558
+  },
+  "final_rows_with_any_missing": 3428,
+  "final_fully_observed_rows": 97438,
+  "retained_rows": 88745,
+  "excluded_rows": 12121,
+  "all_inputs_sha256": {
+    "raw": "1a45bc505ac8f5674b606b98bb14a5405e370852d7d313dc34cd8c81bf892960",
+    "clean": "62a37ecf7c490089ba3f3fd6b74fcd8cc384b8d26b5d9fc663de91494d9e8ae7",
+    "imputed": "3d74ad9113a9b35a03059786eeeb007119bd7107de6b74eb346625a65673dc15"
+  },
+  "optional_inputs_sha256": {
+    "cleaning_audit": "5cdecd46f5c54e046a4a38a110bb1e53aaa07fcdbf9dd2010ea848bcb02e0d36",
+    "imputation_summary": "73b1c7e90241d57235baa16d9ae4bad96b32a1e8f9e5b625027d593bdc40a540"
+  },
+  "scope": "Dataset completeness and documented partitions only; not model-window validity.",
+  "caveats": [
+    "Original missingness is counted AFTER initial temporal trimming, not across all raw rows.",
+    "Initial actuator empty entries reflect change-based logging; they need not be device failures.",
+    "The excluded 2021 period is a partitioning decision, not a deletion of those rows from the curated CSV.",
+    "No causal diagnosis of sensor/device failures or repair dates is inferred.",
+    "Counts do not demonstrate that imputed target values were excluded by the training code."
+  ]
+}

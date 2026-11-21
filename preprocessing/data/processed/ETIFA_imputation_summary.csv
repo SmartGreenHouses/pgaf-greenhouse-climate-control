@@ -1,0 +1,16 @@
+variable,method,missing_before,filled,missing_after
+dry_bulb_temperature,linear<=4,6495,3352,3143
+wet_bulb_temperature,linear<=4,6263,3129,3134
+relative_humidity,linear<=4,7161,4655,2506
+humidity_deficit,derived_from_tbs_hr_gap_le_4,3224,221,3003
+outdoor_temperature,linear<=4,4536,2254,2282
+outdoor_relative_humidity,linear<=4,15089,12802,2287
+wind_speed,linear<=4,12511,10228,2283
+wind_direction,angular<=4,7804,5528,2276
+radiation,linear<=4,28403,26079,2324
+humidification,ffill,62500,62500,0
+window_1_position,ffill,49222,49222,0
+window_2_position,ffill,54371,54371,0
+screen_1_position,ffill,58364,58364,0
+screen_2_position,ffill,58409,58409,0
+pipe_temperature,linear<=4,2533,213,2320

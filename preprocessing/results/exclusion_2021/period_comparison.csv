@@ -1,0 +1,11 @@
+stage,period,rows,missing_rows,missing_rows_pct,missing_sensor_rows,all_nine_missing_rows,missing_sensor_cells,missing_total_cells
+before_imputation,before_exclusion,75881,71421,94.12237582530541,29288,40,49861,257936
+before_imputation,excluded_2021,12121,11107,91.63435360118802,7057,2168,30042,69219
+before_imputation,after_exclusion,12864,12815,99.61909203980099,7080,27,11583,49730
+before_imputation,retained_combined,88745,84236,94.91915037466899,36368,67,61444,307666
+before_imputation,all_curated,100866,95343,94.52441853548272,43425,2235,91486,376885
+after_imputation,before_exclusion,75881,219,0.2886097969188598,174,24,599,668
+after_imputation,excluded_2021,12121,3177,26.21070868740203,3174,2146,22384,24608
+after_imputation,after_exclusion,12864,32,0.24875621890547264,32,27,255,282
+after_imputation,retained_combined,88745,251,0.28283283565271283,206,51,854,950
+after_imputation,all_curated,100866,3428,3.398568397676125,3380,2197,23238,25558

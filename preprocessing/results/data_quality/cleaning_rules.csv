@@ -1,0 +1,6 @@
+rule,invalidated_cells
+sensor_box_contradiction,162
+isolated_spike,77
+temperature_equals_minus_5,23
+wet_bulb_above_dry_bulb,6
+out_of_physical_range,1
