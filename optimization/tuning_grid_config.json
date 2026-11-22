@@ -1,0 +1,52 @@
+{
+  "RUN_LABEL": "selected_ga_engineering_aware_lb96_h12_tuning_grid",
+  "EXPERIMENT_PHASE": "selected_ga_lb96_h12_tuning",
+  "DATE_SPLIT": "development_tuning_temporal_episodes",
+  "CLAIM_SCOPE": "selected_ga_hyperparameter_tuning",
+  "SELECTED_DATES": [
+    {"from": "2019-05-21 06:00", "to": "2019-05-22 06:00"},
+    {"from": "2019-08-31 06:00", "to": "2019-09-01 06:00"},
+    {"from": "2020-01-04 06:00", "to": "2020-01-05 06:00"}
+  ],
+  "SEED_VALUES": [11, 13, 16, 20, 24],
+  "BASE_CONFIG": {
+    "RUN_FULL_DATE_SET": false,
+    "RUN_FULL_SEED_SET": false,
+    "GA_VARIANT": "GA_ENGINEERING_AWARE",
+    "FITNESS_PERCENTAGE_GOAL": 1.0,
+    "PATIENCE": 10,
+    "STOP_GA_THR": 0.001,
+    "STOP_GA_FROM": -1.0,
+    "EARLY_STOPPING_ENABLED": false,
+    "ENERGY_PROXY_WEIGHTS": {
+      "pipe": 5.0,
+      "humidification": 2.0,
+      "openings": 0.3
+    },
+    "ALLOWED_DEVIATION_TBS": 0.0,
+    "ALLOWED_DEVIATION_HR": 0.0
+  },
+  "GRID": {
+    "BUDGET_SPLITS": [
+      {"population": 200, "generations": 50, "label": "pop200_gen50"},
+      {"population": 100, "generations": 100, "label": "pop100_gen100"},
+      {"population": 50, "generations": 200, "label": "pop50_gen200"}
+    ],
+    "K_TOURNAMENT": [2, 5],
+    "MUTATION_PROFILES": {
+      "conservative": {
+        "no_mutation": 0.80,
+        "mutation_1": 0.15,
+        "mutation_2": 0.04,
+        "mutation_3": 0.01
+      },
+      "aggressive": {
+        "no_mutation": 0.05,
+        "mutation_1": 0.35,
+        "mutation_2": 0.35,
+        "mutation_3": 0.25
+      }
+    },
+    "GAUSSIAN_SIGMA_FRACTION": [0.04, 0.08, 0.12]
+  }
+}

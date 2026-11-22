@@ -1,0 +1,9 @@
+# Known-compatible environment for the historical TensorFlow/Keras .h5 model.
+# Python 3.10 recommended; CPU inference is supported.
+numpy>=1.26,<2
+pandas>=2.0,<3
+scipy>=1.10,<2
+tensorflow==2.16.2
+tf-keras==2.16.0
+ephem>=4,<5
+h5py>=3,<4

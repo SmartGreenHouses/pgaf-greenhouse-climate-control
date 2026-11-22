@@ -1,0 +1,52 @@
+{
+  "RUN_LABEL": "pgaf_ga_selected",
+  "EXPERIMENT_PHASE": "selected_ga_manuscript",
+  "DATE_SPLIT": "development_tuning_temporal_episodes",
+  "CLAIM_SCOPE": "published_selected_configuration_on_tuning_episodes",
+  "SELECTED_DATES": [
+    {
+      "from": "2019-05-21 06:00",
+      "to": "2019-05-22 06:00"
+    },
+    {
+      "from": "2019-08-31 06:00",
+      "to": "2019-09-01 06:00"
+    },
+    {
+      "from": "2020-01-04 06:00",
+      "to": "2020-01-05 06:00"
+    }
+  ],
+  "SEED_VALUES": [
+    11,
+    13,
+    16,
+    20,
+    24
+  ],
+  "GA_VARIANT": "GA_ENGINEERING_AWARE",
+  "FITNESS_PERCENTAGE_GOAL": 1.0,
+  "GENERATIONS_NUM": 50,
+  "POPULATION_NUM": 200,
+  "K_TOURNAMENT": 2,
+  "PATIENCE": 10,
+  "STOP_GA_THR": 0.001,
+  "STOP_GA_FROM": -1.0,
+  "EARLY_STOPPING_ENABLED": false,
+  "MUTATION_PROBABILITIES": {
+    "no_mutation": 0.8,
+    "mutation_1": 0.15,
+    "mutation_2": 0.04,
+    "mutation_3": 0.01
+  },
+  "GAUSSIAN_SIGMA_FRACTION": 0.04,
+  "ENERGY_PROXY_WEIGHTS": {
+    "pipe": 5.0,
+    "humidification": 2.0,
+    "openings": 0.3
+  },
+  "ALLOWED_DEVIATION_TBS": 0.0,
+  "ALLOWED_DEVIATION_HR": 0.0,
+  "RUN_FULL_DATE_SET": false,
+  "RUN_FULL_SEED_SET": false
+}
