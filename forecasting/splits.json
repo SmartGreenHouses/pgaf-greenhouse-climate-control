@@ -1,0 +1,86 @@
+{
+  "n_rows": 100866,
+  "sha256": "3d74ad9113a9b35a03059786eeeb007119bd7107de6b74eb346625a65673dc15",
+  "timestamp_frequency_minutes": 15,
+  "sensor_targets": [
+    "dry_bulb_temperature",
+    "wet_bulb_temperature",
+    "relative_humidity",
+    "humidity_deficit",
+    "outdoor_temperature",
+    "outdoor_relative_humidity",
+    "wind_speed",
+    "wind_direction",
+    "radiation"
+  ],
+  "past_actuator_inputs": [
+    "pipe_temperature",
+    "humidification",
+    "window_1_position",
+    "window_2_position",
+    "screen_1_position",
+    "screen_2_position"
+  ],
+  "splits": {
+    "V1": {
+      "train": {
+        "start_utc": "2019-04-29T07:30:00+00:00",
+        "end_utc": "2021-02-08T23:45:00+00:00",
+        "rows": 62562,
+        "rows_with_any_missing_value": 143
+      },
+      "validation": {
+        "start_utc": "2021-02-09T00:00:00+00:00",
+        "end_utc": "2021-06-27T17:30:00+00:00",
+        "rows": 13319,
+        "rows_with_any_missing_value": 76
+      },
+      "test": {
+        "start_utc": "2021-11-01T00:00:00+00:00",
+        "end_utc": "2022-03-14T23:45:00+00:00",
+        "rows": 12864,
+        "rows_with_any_missing_value": 32
+      }
+    },
+    "V2": {
+      "train": {
+        "start_utc": "2019-04-29T07:30:00+00:00",
+        "end_utc": "2021-02-08T23:45:00+00:00",
+        "rows": 62562,
+        "rows_with_any_missing_value": 143
+      },
+      "validation": {
+        "start_utc": "2021-11-01T00:00:00+00:00",
+        "end_utc": "2022-03-14T23:45:00+00:00",
+        "rows": 12864,
+        "rows_with_any_missing_value": 32
+      },
+      "test": {
+        "start_utc": "2021-02-09T00:00:00+00:00",
+        "end_utc": "2021-06-27T17:30:00+00:00",
+        "rows": 13319,
+        "rows_with_any_missing_value": 76
+      }
+    },
+    "V3": {
+      "train": {
+        "start_utc": "2019-09-10T07:30:00+00:00",
+        "end_utc": "2021-06-27T17:30:00+00:00",
+        "rows": 63017,
+        "rows_with_any_missing_value": 218
+      },
+      "validation": {
+        "start_utc": "2021-11-01T00:00:00+00:00",
+        "end_utc": "2022-03-14T23:45:00+00:00",
+        "rows": 12864,
+        "rows_with_any_missing_value": 32
+      },
+      "test": {
+        "start_utc": "2019-04-29T07:30:00+00:00",
+        "end_utc": "2019-09-10T07:15:00+00:00",
+        "rows": 12864,
+        "rows_with_any_missing_value": 1
+      }
+    }
+  }
+}
