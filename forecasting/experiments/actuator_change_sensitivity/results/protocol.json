@@ -1,0 +1,23 @@
+{
+  "csv_sha256": "3d74ad9113a9b35a03059786eeeb007119bd7107de6b74eb346625a65673dc15",
+  "cfg_sha256": "d50d8ddcab00ec9d5ed4fe22624b8ec5f0e8a30eafa8c2a072a4412470b113eb",
+  "manifest_sha256": "7f3b4b58bb6c17b68a51925b094454777fb4ea60116bd96265fa6a709c52c014",
+  "H": 16,
+  "event_min_deltas": {
+    "pipe_temperature": 2.0,
+    "humidification": 0.05,
+    "window_1_position": 5.0,
+    "window_2_position": 3.0,
+    "screen_1_position": 1.0,
+    "screen_2_position": 1.0
+  },
+  "event_policy": "exactly_one_large_jump_at_t_and_stable_six_actuators_through_t_plus_H",
+  "control_conditions": {
+    "OBS": "observed",
+    "MASK": "a[t]=a[t-1]",
+    "SUST": "a[t-15:t]=a[t-1]"
+  },
+  "selection": "validation_only",
+  "seed_unit": "5 seeds per V,H,model",
+  "data_leakage": "none; Train scaler; future used only for episode selection and ground truth"
+}

@@ -1,0 +1,4 @@
+version,common_origins_complete,candidate_episodes,event_pipe_temperature,event_humidification,event_window_1_position,event_window_2_position,event_screen_1_position,event_screen_2_position
+V1,11458,75,1,7,5,7,18,37
+V2,8784,37,0,0,3,1,2,31
+V3,11489,60,0,37,10,3,0,10
