@@ -1,188 +1,80 @@
 # Predictive Analytics and Evolutionary Optimization for Greenhouse Climate Control
 
-**Research code, experimental data, trained models, and reproducibility evidence** accompanying the manuscript *A Data-Driven Predictive Analytics Framework for Sustainable Greenhouse Climate Control Using Deep Learning and Evolutionary Optimization* (Ecological Informatics, manuscript **ECOINF-D-26-02633**).
+Research repository accompanying **“A Data-Driven Predictive Analytics Framework for Sustainable Greenhouse Climate Control Using Deep Learning and Evolutionary Optimization”**, submitted to *Ecological Informatics* (manuscript **ECOINF-D-26-02633**, revised submission R1).
 
-This repository documents an end-to-end workflow: greenhouse sensor data quality control, multivariate forecasting, actuator-change sensitivity analysis, and genetic-algorithm-based control optimization.
+The repository contains greenhouse observations, preprocessing code and audits, multivariate forecasting models and evaluation records, a retrospective actuator-change sensitivity study, and a genetic-algorithm (GA) optimization experiment.
 
-> **Research status:** This is the reproducibility repository for the submitted revised manuscript (R1). Publicly available artifacts reflect the original experiments; any deviations, alternative datasets, or historical naming conventions are stated below rather than silently harmonized.
+**Versioning:** [`ecoinf-r1-2026-11-24`](https://github.com/SmartGreenHouses/pgaf-greenhouse-climate-control/tree/ecoinf-r1-2026-11-24) preserves the repository snapshot associated with the R1 submission. The `main` branch contains subsequent organizational improvements; it is not an identical file-tree snapshot of the submitted version.
 
-## At a glance
+## Research workflow
 
-| Component | Scope | Available evidence |
-|:--|:--|:--|
-| [Preprocessing](preprocessing/) | Quality control, short-gap reconstruction, and temporal partitioning | Original/processed datasets, audits, sensitivity analysis, figures, tests |
-| [Forecasting](forecasting/) | LSTM, iTransformer, PatchTST-MV, and Persistence baseline | **2,430** Validation runs; **81** selected configurations; **405** Test evaluations; **405** selected checkpoints |
-| [Actuator-change sensitivity](forecasting/experiments/actuator_change_sensitivity/) | H16 retrospective OBS / MASK / SUST analysis | **45** model/seed evaluations, **172** candidate episodes, paired prediction records and figures |
-| [Optimization](optimization/) | One engineering-aware genetic algorithm, using its original LSTM surrogate | **36** tuning configurations, original aggregate results, configurations and checkpoint |
+| Component | Start here | Contents |
+| --- | --- | --- |
+| **Data preparation** | [Preprocessing](preprocessing/README.md) | Raw and processed observations, cleaning/imputation code, temporal coverage and reconstruction audits |
+| **Climate forecasting** | [Forecasting](forecasting/README.md) | LSTM, iTransformer, PatchTST-MV, Persistence baseline, validation/test results and selected checkpoints |
+| **Actuator sensitivity (H16)** | [Actuator-change experiment](forecasting/experiments/actuator_change_sensitivity/README.md) | Retrospective OBS/MASK/SUST comparisons, matched predictions and result verification |
+| **Evolutionary optimization** | [Optimization](optimization/README.md) | Engineering-aware GA, historical LSTM surrogate, tuning grid and aggregate results |
 
-```mermaid
-flowchart LR
-    A[Raw greenhouse observations] --> B[Cleaning and imputation]
-    B --> C[Temporal splits V1 / V2 / V3]
-    C --> D[Forecasting models]
-    D --> E[Validation-only lookback selection]
-    E --> F[Held-out Test]
-    E --> G[H16 actuator-change sensitivity]
-    J[Historical GA dataset and Keras LSTM] --> I[Genetic optimization]
-```
+The preprocessing and forecasting study uses **15-minute observations** and three temporal partitions (**V1/V2/V3**). Forecasting models use **19 input channels** (nine environmental measurements, six historical actuator measurements, four cyclic time features) to predict nine environmental variables. The GA experiment uses **its own historical dataset and TensorFlow/Keras LSTM checkpoint**, with a different serialized artifact and input configuration from the published PyTorch forecasting checkpoints. The two datasets must not be treated as interchangeable.
 
-**Important:** The optimization branch uses a *separate historical dataset and TensorFlow/Keras LSTM*. The diagram does **not** indicate that the GA used the PyTorch forecasting checkpoints.
-
-## Repository structure
+## Repository layout
 
 ```text
 .
-├── README.md
-├── .gitignore
 ├── preprocessing/
-│   ├── data/
+│   ├── README.md
+│   ├── data/{raw,processed}/
 │   ├── scripts/
-│   ├── results/
-│   └── requirements_preprocessing.txt
+│   └── results/
 ├── forecasting/
-│   ├── core/             # architectures, models, data, metrics
-│   ├── scripts/          # forecasting pipeline
-│   ├── experiments/      # actuator-change sensitivity
-│   ├── checkpoints/
-│   ├── results/
-│   ├── config.json
-│   ├── splits.json
-│   └── requirements.txt
+│   ├── README.md
+│   ├── core/                 # architectures, models, data and metrics
+│   ├── scripts/              # forecasting pipeline
+│   ├── experiments/          # H16 actuator-change sensitivity
+│   ├── checkpoints/          # selected PyTorch model weights and SHA-256 manifest
+│   └── results/              # Validation, Test and Persistence tables
 ├── optimization/
-│   ├── core/             # GA implementation and utilities
-│   ├── scripts/          # experiment entry points
-│   ├── datasets/
-│   ├── models/
-│   ├── results/
-│   ├── selected_ga_config.json
-│   ├── tuning_grid_config.json
-│   ├── requirements.txt
-│   └── README.md
-└── tests/
-    ├── test_preprocessing.py
-    ├── test_forecasting.py
-    └── test_optimization.py
+│   ├── README.md
+│   ├── core/                 # GA implementation and utilities
+│   ├── scripts/              # existing experiment commands
+│   ├── datasets/             # historical GA input
+│   ├── models/               # historical TensorFlow/Keras checkpoint
+│   └── results/              # original aggregate tuning table
+├── tests/                    # unit, protocol and integrity checks
+└── README.md
 ```
 
-## 1. Greenhouse data and preprocessing
+Each component retains its own configuration and dependency files. The experiment-specific documentation identifies its inputs, outputs and verification commands.
 
-The canonical forecasting dataset is [`preprocessing/data/processed/ETIFA_clean_imputed_1h.csv`](preprocessing/data/processed/ETIFA_clean_imputed_1h.csv). Its measurements follow a **15-minute cadence**; the `1h` in the filename refers to the **maximum short-gap reconstruction length**, not hourly sampling. Quality control includes sensor validation, physically informed consistency checks, limited interpolation for short gaps, circular treatment of wind direction, and auditing of missingness.
+## Published evidence at a glance
 
-Three frozen, temporally separated Train/Validation/Test arrangements (**V1**, **V2**, **V3**) are defined in [`forecasting/splits.json`](forecasting/splits.json). Evaluation windows and train-derived normalizers follow the public experimental protocol. Consult the [preprocessing scripts](preprocessing/scripts/) and [forecasting data module](forecasting/core/data.py) for exact rules.
+| Study | Available evidence |
+| --- | --- |
+| Forecasting | **2,430** Validation runs; **81** Validation-selected model/horizon/version configurations; **405** selected PyTorch checkpoints and corresponding Test evaluations |
+| Persistence | **27** aggregated baseline comparisons |
+| Actuator-change sensitivity | **45** model/seed evaluations across OBS, MASK and SUST; **172** candidate episodes; **45** paired-prediction NPZ files |
+| GA tuning | **36** parameter configurations × three episodes × five seeds = **540** historical cases; aggregate table of 36 configurations |
 
-## 2. Predictive models and evaluation
+For exact file definitions, selection rules and experiment limitations, see the component READMEs rather than relying on this overview.
 
-**Models:** LSTM (implementation ID `lstm_sergiot`), iTransformer (`itransformer`), PatchTST-MV (`patchtst_mv`); Persistence is reported as an untrained baseline. The legacy `lstm_original` is **not** included as a fourth neural architecture.
+## Verify the supplied evidence
 
-- **Inputs:** nine environmental sensor variables, six historical actuator variables, and four cyclic time features (**19 input channels**).
-- **Outputs:** nine environmental targets.
-- **Forecast horizons (15-minute steps):** `4, 8, 16, 24, 48, 96, 144, 192, 288`.
-- **Candidate lookbacks:** `48, 96, 192, 288, 384, 672`.
-- **Seeds:** `8, 13, 22, 27, 31`.
-- **Selection:** for each dataset version × model × horizon, minimize **mean global Validation nMAE-IQR** over five seeds, with standard deviation and smaller lookback as tie-breakers. **Test is not consulted when selecting lookbacks.**
-
-Training uses complete windows; Validation/Test apply the documented future-actuator stability restrictions for retrospective evaluation. The model's assessment is observational and should not be read as causal identification.
-
-### Experimental provenance
-
-| Dataset version | Training environment for published Validation results | Runs |
-|:--|:--|--:|
-| V1 | SIRIUS 1 | 810 |
-| V2 | Ubuntu RTX 5080 | 810 |
-| V3 | SIRIUS 2 | 810 |
-| **Total** | | **2,430** |
-
-The consolidated [Validation and Test results](forecasting/results/) include 81 Validation-selected lookbacks, 405 Test model/seed evaluations (81 combinations × five seeds), and 27 Persistence comparisons. Model weights are provided in [`forecasting/checkpoints/`](forecasting/checkpoints/) with a [SHA-256 manifest](forecasting/checkpoints/manifest.csv). See the [results provenance notes](forecasting/results/README.md) for the source campaigns and cross-checks.
-
-### Basic commands
-
-Use a supported Python/PyTorch environment (see [`forecasting/requirements.txt`](forecasting/requirements.txt)); run from the repository root:
-
-```bash
-python -m forecasting.scripts.pipeline preflight
-python -m forecasting.scripts.pipeline jobs
-python -m unittest discover -s tests -p 'test_forecasting.py' -v
-```
-
-The `pipeline.py` workflow includes separate train/Validation, frozen model selection, and explicitly authorized Test commands. **Do not reselect lookbacks using Test or rerun the original campaign merely to inspect the published tables.** See the `pipeline.py` CLI help and module docstring before launching any expensive computation.
-
-## 3. Actuator-Change Sensitivity Analysis (H16)
-
-This **retrospective conditional sensitivity analysis** studies whether perturbing a past actuator change affects the prediction error for dry-bulb temperature (TBS) and relative humidity (RH) over a four-hour forecast horizon.
-
-| Condition | Intervention on the selected historical actuator |
-|:--|:--|
-| **OBS** | Preserve the observed input history |
-| **MASK** | Replace the most recent changed value by the preceding value |
-| **SUST** | Replace the final 16 historical values by the pre-change value |
-
-The experiment uses nine H16 selected model configurations, five seeds each (**45 checkpoints**), and **75 / 37 / 60** candidate episodes for V1 / V2 / V3. Episode eligibility uses a single detected actuator change and subsequently stable actuation; **future actuator observations are used only for retrospective episode selection**, not provided as model inputs.
-
-An *increase* in error relative to OBS is consistent with the predictor benefiting from the changed-actuator information; equal or lower error is **not** positive evidence for this hypothesis. These are sensitivity comparisons, **not causal effects**. The event-change thresholds reproduce the historical candidate definition; they are not independently validated as physically optimal.
-
-Recalculate the archived evidence checks, audit candidate episodes, and reproduce one GPU inference case:
-
-```bash
-python forecasting/experiments/actuator_change_sensitivity/verify_results.py
-python forecasting/experiments/actuator_change_sensitivity/run.py
-python forecasting/experiments/actuator_change_sensitivity/run.py --smoke --device cuda
-```
-
-The smoke comparison passed on the Ubuntu GPU for OBS, MASK, and SUST with a maximum physical-unit discrepancy of approximately `3.81e-6` for the checked LSTM case. This is **not a claim that all 45 model/seed runs were recomputed**. See the [experiment documentation](forecasting/experiments/actuator_change_sensitivity/README.md) for the protocol and evidence files.
-
-## 4. Genetic-algorithm optimization
-
-The released optimizer contains **one** selected technique, `GA_ENGINEERING_AWARE`, with engineering-aware constraints and an actuator-effort/energy proxy. Its surrogate is a **historical TensorFlow/Keras LSTM**, which is **not** the same checkpoint or input architecture as the PyTorch LSTM reported in the forecasting comparison.
-
-- **Real surrogate input:** 96 prior 15-minute observations × 17 features.
-- **Surrogate output:** nine predicted environmental variables **one step ahead**.
-- **Control experiment:** 12 sequential 15-minute optimization decisions (three hours).
-- **Tuning:** 36 parameter configurations × three episodes × five seeds = **540 cases**.
-- **Selected published configuration:** population `200`, generations `50`, tournament size `2`, conservative mutation profile, Gaussian scale fraction `0.04`.
-- **Selection criterion:** minimum mean best fitness among the 36 configurations. Original aggregate: approximately **0.0925904**.
-
-### Critical artifact-name qualification
-
-The published historical artifacts have requested filenames that **do not describe their actual scientific content**:
-
-| File currently in the repository | Verified original identity | Scientific meaning |
-|:--|:--|:--|
-| `optimization/models/LSTM_L48_H1.h5` | Original `model_lstm_lb96.h5` | **Actual lookback 96**, one-step prediction, 17 input features |
-| `optimization/datasets/ETIFA_clean_imputed_1h.csv` | Original `DIRTY-DS-15-SUMMER.csv` | **Historical GA data**, distinct from the canonical forecasting dataset of the same filename |
-
-A filename change **does not** change model weights, input shape, data provenance, or sampling protocol. The two identically named CSVs under `preprocessing/` and `optimization/` must not be treated as identical. Details and SHA-256 hashes are provided in [`optimization/README.md`](optimization/README.md).
-
-### Inspect and test without rerunning the tuning grid
-
-The GA requires a **separate Python 3.10 TensorFlow environment**, described in [`optimization/requirements.txt`](optimization/requirements.txt). Run from the repository root:
-
-```bash
-python -m optimization.scripts.run_selected_ga --case-count  # 15
-python -m optimization.scripts.run_tuning_grid --config-count # 36
-python -m unittest discover -s tests -p 'test_optimization.py' -v
-```
-
-Full optimization runs are computationally more expensive and write to `optimization/out/` (ignored by Git). A historical single-case GA run has been functionally reproduced, but **exact numerical reproduction of the full historical GA trajectories has not been established**. See [Optimization](optimization/README.md) for the scope of the available evidence.
-
-## Verification and software environments
-
-From the repository root, in an environment with the required packages:
+Run from the **repository root**, using an environment with NumPy, pandas and PyTorch:
 
 ```bash
 python -m unittest discover -s tests -p 'test_*.py' -v
 python forecasting/experiments/actuator_change_sensitivity/verify_results.py
+python -m optimization.scripts.run_selected_ga --case-count    # 15
+python -m optimization.scripts.run_tuning_grid --config-count  # 36
 ```
 
-These checks previously passed with **9 preprocessing + 8 forecasting + 8 GA tests** (25 total), plus independent sensitivity-result verification. Tests cover different assertions and are retained deliberately. Some tests are functional/protocol checks, not a full recomputation of every historical training run.
+These commands inspect configurations and saved evidence. **They do not retrain the forecasting models or rerun the GA tuning grid.** The historical GA surrogate requires a separate TensorFlow/TF-Keras environment for actual model inference; see [Optimization](optimization/README.md).
 
-The published components have **different runtime requirements**: preprocessing/forecasting use current NumPy and PyTorch, while the historical optimization surrogate requires a pinned TensorFlow/TF-Keras setup and NumPy 1.x. Use separate virtual environments; do not attempt to install all component requirement files indiscriminately into one environment.
+## Interpretation and limitations
 
-## Reproducibility, scope, and citation
+- Forecasting lookbacks were selected from **Validation**, before evaluating **Test**. Results are observational; neither forecasts nor actuator-input sensitivity comparisons establish causal control effects.
+- The H16 sensitivity study uses future actuator observations **only for retrospective episode selection**, not as model inputs. Its event thresholds reproduce the historical definition and are not independently established as physically optimal.
+- The historical GA model/data artifacts are distinct from the canonical forecasting artifacts. GA tuning summaries do **not** amount to independent held-out controller validation; exact numerical reproduction of all original GA trajectories has not been established.
+- Checkpoint manifests and experiment-specific hashes support artifact identification, but do not replace the underlying methodology or establish unrestricted rights to reuse third-party data. No general reuse license is supplied in this repository.
 
-- Results and models are provided alongside dataset provenance, frozen splits, configurations, and integrity checks.
-- The original experiments include cluster- and workstation-specific execution environments; numerical behavior can vary across CPU/GPU backends. Compare results using the documented units and protocols rather than assuming bitwise-identical trajectories on every platform.
-- The actuator-change event thresholds are a historical candidate definition, not universally validated physical thresholds.
-- The GA's renamed model/data artifacts **must not** be misrepresented as the canonical forecasting LSTM and dataset.
-- **Citation:** *A Data-Driven Predictive Analytics Framework for Sustainable Greenhouse Climate Control Using Deep Learning and Evolutionary Optimization*, manuscript ECOINF-D-26-02633. A journal DOI and final bibliographic details should only be added after publication.
-
-For task-specific scripts, outputs, and known limitations, follow the component-level documentation linked above.
+**Citation:** *A Data-Driven Predictive Analytics Framework for Sustainable Greenhouse Climate Control Using Deep Learning and Evolutionary Optimization*, *Ecological Informatics*, manuscript ECOINF-D-26-02633. Journal publication details and a DOI should be added only after they are available.

@@ -1,54 +1,65 @@
-# PGAF — Genetic Algorithm optimization
+# Genetic-algorithm optimization
 
-Research code for the **single** selected GA technique, `GA_ENGINEERING_AWARE`, used in the *Ecological Informatics* manuscript. Other exploratory evolutionary variants are deliberately omitted. The algorithm simulates control of six greenhouse actuators using an LSTM surrogate and a composite engineering-aware fitness.
+This component contains the **`GA_ENGINEERING_AWARE`** optimizer, configuration files, historical surrogate model and input dataset, and the aggregate tuning results of the PGAF greenhouse control study. Only the GA variant selected for the reported study is provided here; other exploratory variants are outside the released implementation.
 
-## Critical provenance: labels versus actual data and model
+## Experimental design
 
-The author requested the following names for the historical files:
+The optimizer searches over **six greenhouse actuators** using a composite objective that includes climate-target performance and engineering-aware penalties, including an actuator/energy-effort proxy. It is a simulation-based optimization experiment, **not a deployed autonomous greenhouse controller**.
 
-| Required local file | SHA-256 | Original artifact |
-| --- | --- | --- |
-| `optimization/models/LSTM_L48_H1.h5` | `49869b812ef659e8cecacd9e0e2789ed17e265642cae9dbbdc7bc182858ada68` | `model_lstm_lb96.h5` from historical GA training |
-| `optimization/datasets/ETIFA_clean_imputed_1h.csv` | `6ab084f5d45a4613eaba81d46a165788ea2765f577526b530a816ceccbf08b9b` | `DIRTY-DS-15-SUMMER.csv` used by the historical GA |
+| Element | Configuration |
+| --- | --- |
+| Prediction surrogate | Historical **TensorFlow/TF-Keras LSTM** checkpoint |
+| Actual surrogate input | **96** previous 15-minute steps × **17** features |
+| Surrogate output | **Nine** environmental variables, **one step ahead** |
+| Control horizon | **12 sequential 15-minute decisions (3 hours)** |
+| Objective/algorithm | `GA_ENGINEERING_AWARE` |
+| Tuning grid | **36** configurations × **3** episodes × **5** seeds = **540** cases |
+| Budget per control decision | **10,000** candidate evaluations |
+| Selected configuration | Population **200**, generations **50**, tournament **2**, conservative mutation profile, Gaussian sigma fraction **0.04**, early stopping disabled |
 
-**These names are aliases, not proof of equivalence.** The existing `.h5` checkpoint **actually takes 96 historical steps × 17 features** (`(None, 96, 17)`) and predicts 9 environmental variables for the next step (`(None, 9)`). Its renamed filename `LSTM_L48_H1.h5` **does not mean its real lookback is 48**. The GA subsequently optimizes 12 successive 15-minute control decisions (3 hours).
+The selection criterion was **minimum mean step-best fitness**, averaged across the 12 optimization steps, episodes and seeds. The archived [`results/tuning_results.csv`](results/tuning_results.csv) contains the 36 aggregate configurations. The selected configuration is `pop200_gen50_k2_mutconservative_sigma0p04` (reported aggregate mean fitness approximately **0.0925904**).
 
-The renamed historical GA CSV is **not verified to be the same dataset** as the ETIFA preprocessing/V1–V3 forecasting dataset. Its SHA-256 differs from the previously supplied ETIFA imputed CSV. Do **not** claim they are the same data or that the GA used the PyTorch `lstm_sergiot` checkpoint. The GA uses its historical **TensorFlow/Keras** checkpoint, not the PyTorch forecasting model. These differences are documented here for scientific traceability.
+**Evaluation scope:** the aggregate selected-configuration results concern the tuning episodes. They should **not** be described as independent held-out controller validation. Full original per-case trajectory logs are not included, and exact numerical reproduction of all historical GA trajectories has not been established.
 
-The GitHub repository includes the historical model and dataset at the paths above. Their SHA-256 hashes establish artifact identity, while their filenames are aliases that must not be interpreted as architectural or dataset equivalence. A single `.gitignore` is maintained at the repository root.
-
-## Files
+## Source files
 
 ```text
 optimization/
-  README.md
-  requirements.txt
-  core/
-    constants.py
-    genetic_algorithm_class.py
-    individual_class.py
-    ga_method_registry.py
-    utils.py
-    run_genetic_algorithm_experiments.py
-  scripts/
-    run_selected_ga.py
-    run_tuning_grid.py
-    aggregate_tuning_grid_results.py
-  selected_ga_config.json
-  tuning_grid_config.json
-  results/tuning_results.csv
-  models/LSTM_L48_H1.h5
-  datasets/ETIFA_clean_imputed_1h.csv
-
-tests/
-  test_optimization.py
+├── core/
+│   ├── constants.py
+│   ├── ga_method_registry.py
+│   ├── genetic_algorithm_class.py
+│   ├── individual_class.py
+│   ├── run_genetic_algorithm_experiments.py
+│   └── utils.py
+├── scripts/
+│   ├── run_selected_ga.py
+│   ├── run_tuning_grid.py
+│   └── aggregate_tuning_grid_results.py
+├── datasets/ETIFA_clean_imputed_1h.csv
+├── models/LSTM_L48_H1.h5
+├── results/tuning_results.csv
+├── selected_ga_config.json
+├── tuning_grid_config.json
+└── requirements.txt
 ```
 
-The `out/` directory contains generated outputs and is not tracked. The script/config labels containing `lb96_h12` in original grid metadata preserve traceability to archived experiment identifiers; `lb96` describes the **real** model history and `h12` the **GA control duration**.
+The scripts are launched as **Python modules from the repository root** (`python -m optimization.scripts...`). Generated runs go under `optimization/out/`, excluded from version control. The reusable GA implementation is under `core/`; `utils.py` is the renamed historical utility module, without the old `_v` suffix. Tests live in [`../tests/test_optimization.py`](../tests/test_optimization.py).
 
-## Install and test
+## Historical artifacts and naming
 
-Python 3.10 in a separate environment is recommended:
+The two included artifacts preserve established repository filenames, but those names should **not** be used to infer scientific equivalence with the forecasting component:
+
+| Repository artifact | Historical source name | SHA-256 |
+| --- | --- | --- |
+| [`models/LSTM_L48_H1.h5`](models/LSTM_L48_H1.h5) | `model_lstm_lb96.h5` | `49869b812ef659e8cecacd9e0e2789ed17e265642cae9dbbdc7bc182858ada68` |
+| [`datasets/ETIFA_clean_imputed_1h.csv`](datasets/ETIFA_clean_imputed_1h.csv) | `DIRTY-DS-15-SUMMER.csv` | `6ab084f5d45a4613eaba81d46a165788ea2765f577526b530a816ceccbf08b9b` |
+
+In particular, the checkpoint filename includes `L48`, but the verified Keras input shape is **`(None, 96, 17)`**, not a lookback of 48. The GA dataset has a **different hash and historical provenance** from [`../preprocessing/data/processed/ETIFA_clean_imputed_1h.csv`](../preprocessing/data/processed/ETIFA_clean_imputed_1h.csv). The GA's TensorFlow/Keras model and the forecasting study's PyTorch checkpoint files are **distinct serialized artifacts with different input configurations**. Do not substitute one dataset or checkpoint for the other.
+
+## Environment and checks
+
+The GA inference runtime needs a **separate Python 3.10 environment**, because its [`requirements.txt`](requirements.txt) pins TensorFlow/TF-Keras and NumPy 1.x. From the repository root:
 
 ```bash
 conda create -n pgaf-ga python=3.10 pip -y
@@ -56,55 +67,26 @@ conda activate pgaf-ga
 python -m pip install -r optimization/requirements.txt
 ```
 
-Run from the repository root:
+Inspect the provided experiment configurations without running expensive optimization:
 
 ```bash
+python -m optimization.scripts.run_selected_ga --case-count   # 15
+python -m optimization.scripts.run_tuning_grid --config-count # 36
+python -m optimization.scripts.run_tuning_grid --case-count   # 540
 python -m unittest discover -s tests -p 'test_optimization.py' -v
-sha256sum optimization/models/LSTM_L48_H1.h5 optimization/datasets/ETIFA_clean_imputed_1h.csv
 ```
 
-The eight tests cover the selected GA operators/settings, the 36-config grid, published tuning summary, and hashes of the two original assets. If model and CSV are absent, the asset test is skipped. Unit fitness tests use a simulated predictor; they **do not** test actual TensorFlow inference. To load the actual `.h5`:
+The eight unit checks validate configuration, operators, ranking consistency and artifact hashes. **They use a surrogate test stub for fitness checks, not the real TensorFlow model.** To load the historical `.h5` for a separate inference-environment check:
 
 ```bash
-python -c 'from optimization.core.utils import get_model; m=get_model(); print(m.input_shape, m.output_shape); assert m.input_shape==(None,96,17) and m.output_shape==(None,9)'
+python -c 'from optimization.core.utils import get_model; m=get_model(); print(m.input_shape, m.output_shape)'
 ```
 
-## Selected GA configuration
-
-The manuscript's selection criterion is the **minimum mean best fitness** across all 12 control steps of each tuning case, averaged over all five seeds and three episodes. The selected settings are:
-
-- Method: `GA_ENGINEERING_AWARE`
-- `POPULATION_NUM=200`, `GENERATIONS_NUM=50`, `K_TOURNAMENT=2`
-- Conservative mutation: no mutation `0.80`, mutation 1 `0.15`, mutation 2 `0.04`, mutation 3 `0.01`
-- `GAUSSIAN_SIGMA_FRACTION=0.04`, early stopping disabled
-- Three 24-hour input episodes × five seeds = **15 cases**, each containing **12 subsequent 15-minute GA control decisions**
-- **10,000** LSTM–GA evaluations per control decision; **120,000** per 3-hour simulated episode
+For an individual GA reproduction run, first inspect `--help` and the [`selected_ga_config.json`](selected_ga_config.json) settings; this performs substantially more computation than the checks above:
 
 ```bash
-python -m optimization.scripts.run_selected_ga --case-count
-python -m optimization.scripts.run_selected_ga --case-index 0 --output-root optimization/out/reproduction_check
+python -m optimization.scripts.run_selected_ga --case-index 0 \
+  --output-root optimization/out/reproduction_check
 ```
 
-The already-performed local Mac smoke run completed case 0 in 12 steps / 120,000 evaluations, with MAE(TBS) = 0.8885 °C and MAE(HR) = 3.2283 percentage points. These are **diagnostic local-run values**, not the manuscript aggregate. Its trajectory does **not** numerically match the archived original case, despite successful execution; full numeric/statistical reproducibility has **not** been established.
-
-## Historical tuning grid and results
-
-- Three budgets: `200×50`, `100×100`, `50×200` (fixed 10,000 evaluations/step)
-- Two tournament sizes: `k=2`, `k=5`
-- Two mutation profiles: conservative, aggressive
-- Three mutation scales: `0.04`, `0.08`, `0.12`
-
-Total: **36 configurations × 3 episodes × 5 seeds = 540 historical cases**, each with 12 control steps. The included `results/tuning_results.csv` contains **all 36 original aggregate rows**, with 15 cases and 180 step records per configuration. Strict-minimum winner: `pop200_gen50_k2_mutconservative_sigma0p04`, mean step-best fitness **0.09259039864241379**.
-
-```bash
-python -m optimization.scripts.run_tuning_grid --config-count   # 36
-python -m optimization.scripts.run_tuning_grid --case-count     # 540
-# Individual case only, if required:
-# python -m optimization.scripts.run_tuning_grid --case-index 0
-```
-
-`scripts/aggregate_tuning_grid_results.py` now uses the **same minimum-mean-fitness rule as the manuscript** when the original per-case output files are supplied. An earlier exploratory script used a **one-standard-error then fastest** rule and selected a different configuration; that alternative was **not** the article's selection criterion. The historical aggregate CSV is provided directly: no full rerun is necessary for reading or checking the reported results.
-
-## Scope limits
-
-The historical checkpoint and dataset are included in this repository. Full SIRIUS per-case logs and independent held-out controller evaluation records are **not included**. Do not claim those are present. Maintain a clear separation between hyperparameter tuning data and independent later evaluation.
+Do not interpret a successful software smoke run as proof of bit-for-bit reproduction of the original GA trajectories. For forecasting results and the distinct PyTorch LSTM checkpoints, consult [Forecasting](../forecasting/README.md).
