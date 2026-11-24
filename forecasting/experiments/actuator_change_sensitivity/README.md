@@ -12,7 +12,7 @@ This directory contains the original **OBS / MASK / SUST** evidence and a reposi
 - **SUST**: replace the changed actuator's last 16 historical values, `a[t−15] … a[t]`, with `a[t−1]`.
 - No future values are injected into the network. **Future actuator measurements are used to select stable episodes retrospectively**; this is a conditional post-hoc sensitivity test, **not** a real-time intervention or causal experiment.
 
-**Methodological qualification:** the original implementation itself labels the event thresholds as a *candidate definition requiring justification*. The thresholds were applied in producing these results but are not independently validated as universal or physically optimal change thresholds. The runner preserves them instead of silently redesigning the experiment. They must be explained accurately in the manuscript.
+**Methodological qualification:** the original implementation itself labels the event thresholds as a *candidate definition requiring justification*. The thresholds were applied in producing these results but are not independently validated as universal or physically optimal change thresholds. The runner preserves them instead of silently redesigning the experiment. These thresholds are documented as originally implemented, without claiming that they are physically optimal.
 
 ## Included evidence
 
@@ -76,6 +76,6 @@ python forecasting/experiments/actuator_change_sensitivity/run.py \
   --output-root /tmp/pgaf_actuator_sensitivity_reproduction
 ```
 
-The runner uses `forecasting.models`, whose three published architectures preserve the parameter layout of the historical selected models. Unlike the original campaign script, it uses current public repository paths; **numerical equivalence of a fresh full inference run must still be verified against the stored NPZ** before claiming exact reproduction of the 45 original runs. The runner refuses to overwrite a nonempty output directory.
+The runner uses `forecasting.core.models`, whose three published architectures preserve the parameter layout of the historical selected models. Unlike the original campaign script, it uses current public repository paths; **numerical equivalence of a fresh full inference run must still be verified against the stored NPZ** before claiming exact reproduction of the 45 original runs. The runner refuses to overwrite a nonempty output directory.
 
 No data or checkpoints should be renamed or overwritten for this experiment. The GA's historical Keras `.h5` model is **not** used here.

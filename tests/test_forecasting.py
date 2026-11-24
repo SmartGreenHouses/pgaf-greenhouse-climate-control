@@ -8,10 +8,11 @@ import numpy as np
 import pandas as pd
 import torch
 
-from forecasting import data, metrics, models, pipeline
+from forecasting.core import data, metrics, models
+from forecasting.scripts import pipeline
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[1] / "forecasting"
 CFG = json.loads((ROOT/'config.json').read_text())
 SPLITS = json.loads((ROOT/'splits.json').read_text())
 

@@ -9,13 +9,13 @@ from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+ROOT = Path(__file__).resolve().parents[1] / "optimization"
+sys.path.insert(0, str(ROOT.parent))
 
-# The production utils_v imports the historical .h5 model. These unit checks
+# The production optimization.core.utils imports the historical .h5 model. These unit checks
 # deliberately replace only that dependency; no assertion of real model fidelity.
-if "utils_v" not in sys.modules:
-    mocked_utils = types.ModuleType("utils_v")
+if "optimization.core.utils" not in sys.modules:
+    mocked_utils = types.ModuleType("optimization.core.utils")
     mocked_utils.prepare_forecast_data = lambda x: x
     mocked_utils.forecast_from_model_history = lambda *a, **k: None
     def batch_stub(model_history, prediction_columns, steps, last_row_updates_list):
@@ -25,12 +25,12 @@ if "utils_v" not in sys.modules:
                         65.0 + 10.0 * float(u["Humidificacion"])])
         return np.asarray(out), prediction_columns
     mocked_utils.forecast_batch_from_model_history = batch_stub
-    sys.modules["utils_v"] = mocked_utils
+    sys.modules["optimization.core.utils"] = mocked_utils
 
-import genetic_algorithm_class as ga
-from individual_class import Individual
-from constants import POSSIBLE_GENES
-from run_tuning_grid import build_cases, build_grid_configs
+from optimization.core import genetic_algorithm_class as ga
+from optimization.core.individual_class import Individual
+from optimization.core.constants import POSSIBLE_GENES
+from optimization.scripts.run_tuning_grid import build_cases, build_grid_configs
 
 class TestSelectedGA(unittest.TestCase):
     def setUp(self):
@@ -42,7 +42,7 @@ class TestSelectedGA(unittest.TestCase):
                          "Radiacion":150.})
 
     def test_only_one_variant(self):
-        from ga_method_registry import GA_VARIANTS, validate_method
+        from optimization.core.ga_method_registry import GA_VARIANTS, validate_method
         self.assertEqual(GA_VARIANTS, ("GA_ENGINEERING_AWARE",))
         with self.assertRaises(ValueError):
             validate_method("GA_BASE")
@@ -92,7 +92,7 @@ class TestSelectedGA(unittest.TestCase):
 
     def test_published_tuning_results_match_selected_configuration(self):
         import pandas as pd
-        from aggregate_tuning_grid_results import rank_by_min_mean_fitness
+        from optimization.scripts.aggregate_tuning_grid_results import rank_by_min_mean_fitness
         observed = pd.read_csv(ROOT / "results" / "tuning_results.csv")
         self.assertEqual(len(observed), 36)
         self.assertTrue((observed["n_cases"] == 15).all())

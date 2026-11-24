@@ -10,7 +10,7 @@ import pandas as pd
 
 def parse_args():
     p = argparse.ArgumentParser(description="Aggregate and rank selected-GA tuning grid outputs.")
-    p.add_argument("--root", default=str(Path(__file__).resolve().parent / "out" / "selected_ga_engineering_aware_lb96_h12_tuning_grid"))
+    p.add_argument("--root", default=str(Path(__file__).resolve().parents[1] / "out" / "selected_ga_engineering_aware_lb96_h12_tuning_grid"))
     return p.parse_args()
 
 

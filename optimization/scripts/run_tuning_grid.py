@@ -14,7 +14,7 @@ def parse_args():
     p = argparse.ArgumentParser(
         description="Run selected-GA tuning grid: GA_ENGINEERING_AWARE + LSTM lb96 + horizon 12."
     )
-    p.add_argument("--config", default=str(Path(__file__).resolve().parent / "tuning_grid_config.json"))
+    p.add_argument("--config", default=str(Path(__file__).resolve().parents[1] / "tuning_grid_config.json"))
     p.add_argument("--config-count", action="store_true", help="Print number of grid configurations and exit.")
     p.add_argument("--case-count", action="store_true", help="Print number of grid/date/seed cases and exit.")
     p.add_argument("--case-index", type=int, default=None, help="Run one grid/date/seed case, zero based.")
@@ -111,7 +111,7 @@ def main() -> int:
         return 0
 
     run_label = str(config.get("RUN_LABEL", "selected_ga_engineering_aware_lb96_h12_tuning_grid"))
-    output_root = Path(args.output_root) if args.output_root else Path(__file__).resolve().parent / "out" / run_label
+    output_root = Path(args.output_root) if args.output_root else Path(__file__).resolve().parents[1] / "out" / run_label
 
     if args.dry_run:
         print("Selected GA tuning grid")
@@ -148,8 +148,8 @@ def main() -> int:
     effective_config_path = Path(effective_config["OUTPUT_FOLDER"]) / "effective_config.json"
     effective_config_path.write_text(json.dumps(effective_config, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    from constants import HISTORY_STEPS, STEPS_TO_RUN, MODEL_PATH, DATA_CSV_PATH
-    from run_genetic_algorithm_experiments import run_experiments
+    from ..core.constants import HISTORY_STEPS, STEPS_TO_RUN, MODEL_PATH, DATA_CSV_PATH
+    from ..core.run_genetic_algorithm_experiments import run_experiments
 
     print("=" * 80)
     print("Selected GA tuning case")

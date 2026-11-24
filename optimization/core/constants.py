@@ -1,7 +1,7 @@
 from pathlib import Path
 import os
 
-PROJECT_ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 # Set to True to print messages about the execution of the code.
 MSG_MODE = False 

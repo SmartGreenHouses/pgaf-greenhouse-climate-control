@@ -4,7 +4,7 @@
 
 This repository documents an end-to-end workflow: greenhouse sensor data quality control, multivariate forecasting, actuator-change sensitivity analysis, and genetic-algorithm-based control optimization.
 
-> **Research status:** This is the code and evidence repository for a manuscript under revision. Publicly available artifacts reflect the original experiments; any deviations, alternative datasets, or historical naming conventions are stated below rather than silently harmonized.
+> **Research status:** This is the reproducibility repository for the submitted revised manuscript (R1). Publicly available artifacts reflect the original experiments; any deviations, alternative datasets, or historical naming conventions are stated below rather than silently harmonized.
 
 ## At a glance
 
@@ -32,42 +32,43 @@ flowchart LR
 
 ```text
 .
+├── README.md
 ├── .gitignore
 ├── preprocessing/
-│   ├── data/                    # original and processed greenhouse records
-│   ├── scripts/                 # preprocessing, audits, figure generation
-│   ├── results/                 # reproducibility audits and figures
-│   └── tests/
+│   ├── data/
+│   ├── scripts/
+│   ├── results/
+│   └── requirements_preprocessing.txt
 ├── forecasting/
-│   ├── architectures.py        # neural-network architecture definitions
-│   ├── models.py               # the three published forecasting models
-│   ├── data.py                 # partitions, scaling, windows, origins
-│   ├── metrics.py              # evaluation metrics
-│   ├── pipeline.py             # train / select / authorized Test workflow
-│   ├── config.json             # experiment settings
-│   ├── splits.json             # frozen temporal partitions
-│   ├── checkpoints/            # 405 selected PyTorch checkpoints + hashes
-│   ├── results/                # Validation / Test / Persistence tables
-│   ├── experiments/
-│   │   └── actuator_change_sensitivity/
-│   └── tests/
-└── optimization/
-    ├── genetic_algorithm_class.py
-    ├── run_selected_ga.py
-    ├── run_tuning_grid.py
-    ├── selected_ga_config.json
-    ├── tuning_grid_config.json
-    ├── results/tuning_results.csv
-    ├── models/                 # historical TensorFlow/Keras checkpoint
-    ├── datasets/               # historical GA dataset
-    └── tests/
+│   ├── core/             # architectures, models, data, metrics
+│   ├── scripts/          # forecasting pipeline
+│   ├── experiments/      # actuator-change sensitivity
+│   ├── checkpoints/
+│   ├── results/
+│   ├── config.json
+│   ├── splits.json
+│   └── requirements.txt
+├── optimization/
+│   ├── core/             # GA implementation and utilities
+│   ├── scripts/          # experiment entry points
+│   ├── datasets/
+│   ├── models/
+│   ├── results/
+│   ├── selected_ga_config.json
+│   ├── tuning_grid_config.json
+│   ├── requirements.txt
+│   └── README.md
+└── tests/
+    ├── test_preprocessing.py
+    ├── test_forecasting.py
+    └── test_optimization.py
 ```
 
 ## 1. Greenhouse data and preprocessing
 
 The canonical forecasting dataset is [`preprocessing/data/processed/ETIFA_clean_imputed_1h.csv`](preprocessing/data/processed/ETIFA_clean_imputed_1h.csv). Its measurements follow a **15-minute cadence**; the `1h` in the filename refers to the **maximum short-gap reconstruction length**, not hourly sampling. Quality control includes sensor validation, physically informed consistency checks, limited interpolation for short gaps, circular treatment of wind direction, and auditing of missingness.
 
-Three frozen, temporally separated Train/Validation/Test arrangements (**V1**, **V2**, **V3**) are defined in [`forecasting/splits.json`](forecasting/splits.json). Evaluation windows and train-derived normalizers follow the public experimental protocol. Consult the [preprocessing scripts](preprocessing/scripts/) and [forecasting data module](forecasting/data.py) for exact rules.
+Three frozen, temporally separated Train/Validation/Test arrangements (**V1**, **V2**, **V3**) are defined in [`forecasting/splits.json`](forecasting/splits.json). Evaluation windows and train-derived normalizers follow the public experimental protocol. Consult the [preprocessing scripts](preprocessing/scripts/) and [forecasting data module](forecasting/core/data.py) for exact rules.
 
 ## 2. Predictive models and evaluation
 
@@ -98,9 +99,9 @@ The consolidated [Validation and Test results](forecasting/results/) include 81 
 Use a supported Python/PyTorch environment (see [`forecasting/requirements.txt`](forecasting/requirements.txt)); run from the repository root:
 
 ```bash
-python -m forecasting.pipeline preflight
-python -m forecasting.pipeline jobs
-python -m unittest discover -s forecasting/tests -p 'test_*.py' -v
+python -m forecasting.scripts.pipeline preflight
+python -m forecasting.scripts.pipeline jobs
+python -m unittest discover -s tests -p 'test_forecasting.py' -v
 ```
 
 The `pipeline.py` workflow includes separate train/Validation, frozen model selection, and explicitly authorized Test commands. **Do not reselect lookbacks using Test or rerun the original campaign merely to inspect the published tables.** See the `pipeline.py` CLI help and module docstring before launching any expensive computation.
@@ -117,7 +118,7 @@ This **retrospective conditional sensitivity analysis** studies whether perturbi
 
 The experiment uses nine H16 selected model configurations, five seeds each (**45 checkpoints**), and **75 / 37 / 60** candidate episodes for V1 / V2 / V3. Episode eligibility uses a single detected actuator change and subsequently stable actuation; **future actuator observations are used only for retrospective episode selection**, not provided as model inputs.
 
-An *increase* in error relative to OBS is consistent with the predictor benefiting from the changed-actuator information; equal or lower error is **not** positive evidence for this hypothesis. These are sensitivity comparisons, **not causal effects**. The event-change thresholds reproduce the historical candidate definition and still require a clear physical/methodological justification in the manuscript.
+An *increase* in error relative to OBS is consistent with the predictor benefiting from the changed-actuator information; equal or lower error is **not** positive evidence for this hypothesis. These are sensitivity comparisons, **not causal effects**. The event-change thresholds reproduce the historical candidate definition; they are not independently validated as physically optimal.
 
 Recalculate the archived evidence checks, audit candidate episodes, and reproduce one GPU inference case:
 
@@ -156,9 +157,9 @@ A filename change **does not** change model weights, input shape, data provenanc
 The GA requires a **separate Python 3.10 TensorFlow environment**, described in [`optimization/requirements.txt`](optimization/requirements.txt). Run from the repository root:
 
 ```bash
-python optimization/run_selected_ga.py --case-count  # 15
-python optimization/run_tuning_grid.py --config-count # 36
-PYTHONPATH=optimization python -m unittest discover -s optimization/tests -p 'test_*.py' -v
+python -m optimization.scripts.run_selected_ga --case-count  # 15
+python -m optimization.scripts.run_tuning_grid --config-count # 36
+python -m unittest discover -s tests -p 'test_optimization.py' -v
 ```
 
 Full optimization runs are computationally more expensive and write to `optimization/out/` (ignored by Git). A historical single-case GA run has been functionally reproduced, but **exact numerical reproduction of the full historical GA trajectories has not been established**. See [Optimization](optimization/README.md) for the scope of the available evidence.
@@ -168,9 +169,7 @@ Full optimization runs are computationally more expensive and write to `optimiza
 From the repository root, in an environment with the required packages:
 
 ```bash
-python -m unittest discover -s preprocessing/tests -p 'test_*.py' -v
-python -m unittest discover -s forecasting/tests -p 'test_*.py' -v
-PYTHONPATH=optimization python -m unittest discover -s optimization/tests -p 'test_*.py' -v
+python -m unittest discover -s tests -p 'test_*.py' -v
 python forecasting/experiments/actuator_change_sensitivity/verify_results.py
 ```
 
@@ -182,7 +181,7 @@ The published components have **different runtime requirements**: preprocessing/
 
 - Results and models are provided alongside dataset provenance, frozen splits, configurations, and integrity checks.
 - The original experiments include cluster- and workstation-specific execution environments; numerical behavior can vary across CPU/GPU backends. Compare results using the documented units and protocols rather than assuming bitwise-identical trajectories on every platform.
-- The actuator-change event thresholds are a candidate historical definition and need explicit methodological explanation.
+- The actuator-change event thresholds are a historical candidate definition, not universally validated physical thresholds.
 - The GA's renamed model/data artifacts **must not** be misrepresented as the canonical forecasting LSTM and dataset.
 - **Citation:** *A Data-Driven Predictive Analytics Framework for Sustainable Greenhouse Climate Control Using Deep Learning and Evolutionary Optimization*, manuscript ECOINF-D-26-02633. A journal DOI and final bibliographic details should only be added after publication.
 

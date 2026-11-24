@@ -311,7 +311,7 @@ def evaluate(root, versions, data, samples, lbs, device, batch_size, out):
     # que los tres modelos definitivos del código histórico ETIFA.
     if str(root) not in sys.path:
         sys.path.insert(0, str(root))
-    from forecasting import models
+    from forecasting.core import models
     require(models.N_SENSORS == 9, 'La salida debe incluir nueve sensores')
     records = []
     # El intento anterior pudo crear una carpeta vacía antes de cargar el
@@ -435,7 +435,7 @@ def main():
         import torch
         if str(root) not in sys.path:
             sys.path.insert(0, str(root))
-        from forecasting import models
+        from forecasting.core import models
         require(args.device != 'cuda' or torch.cuda.is_available(),
                 'CUDA solicitado pero no disponible')
         device = torch.device(

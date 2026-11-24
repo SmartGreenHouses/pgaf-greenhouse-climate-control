@@ -8,7 +8,7 @@ from datetime import timedelta
 import numpy as np
 import pandas as pd
 
-from genetic_algorithm_class import (
+from .genetic_algorithm_class import (
     algorithm_family,
     count_engineering_rule_violations,
     count_target_progress_rule_violations,
@@ -17,8 +17,8 @@ from genetic_algorithm_class import (
     uses_actuator_effort_penalty,
     uses_hold_last_action,
 )
-from utils_v import add_month_col, encode_cyclical_value, is_it_day_from_date
-from constants import (
+from .utils import add_month_col, encode_cyclical_value, is_it_day_from_date
+from .constants import (
     ALL_SEED_VALUES,
     ALL_SELECTED_DATES,
     DATA_CSV_PATH,

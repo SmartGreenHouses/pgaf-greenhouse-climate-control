@@ -13,7 +13,7 @@ def parse_args():
     p = argparse.ArgumentParser(
         description="Run the simplified selected GA experiment: GA_ENGINEERING_AWARE + LSTM lb96 + horizon 12."
     )
-    p.add_argument("--config", default=str(Path(__file__).resolve().parent / "selected_ga_config.json"))
+    p.add_argument("--config", default=str(Path(__file__).resolve().parents[1] / "selected_ga_config.json"))
     p.add_argument("--case-count", action="store_true", help="Print number of date/seed cases and exit.")
     p.add_argument("--case-index", type=int, default=None, help="Run only one date/seed case, zero based.")
     p.add_argument("--output-root", default=None, help="Root output folder. Defaults to out/<RUN_LABEL>.")
@@ -50,7 +50,7 @@ def main():
     if args.output_root:
         output_root = Path(args.output_root)
     else:
-        output_root = Path(__file__).resolve().parent / "out" / run_label
+        output_root = Path(__file__).resolve().parents[1] / "out" / run_label
 
     if args.case_index is not None:
         if args.case_index < 0 or args.case_index >= len(cases):
@@ -93,8 +93,8 @@ def main():
         return 0
 
     # Import after GA_MODEL_PATH is set so constants.MODEL_PATH sees the override.
-    from constants import HISTORY_STEPS, STEPS_TO_RUN, MODEL_PATH, DATA_CSV_PATH
-    from run_genetic_algorithm_experiments import run_experiments
+    from ..core.constants import HISTORY_STEPS, STEPS_TO_RUN, MODEL_PATH, DATA_CSV_PATH
+    from ..core.run_genetic_algorithm_experiments import run_experiments
 
     print("=" * 80)
     print("Selected GA experiment")

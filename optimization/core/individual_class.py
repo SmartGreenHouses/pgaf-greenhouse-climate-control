@@ -1,7 +1,7 @@
 import math
 import random
 
-from constants import POSSIBLE_GENES
+from .constants import POSSIBLE_GENES
 
 POSSIBLE_GENE_KEYS = tuple(POSSIBLE_GENES)
 

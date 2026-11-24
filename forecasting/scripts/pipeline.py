@@ -2,14 +2,14 @@
 """Reproduce Train/Validation, freezes lookbacks and evaluates Test separately.
 
 Examples, run from the repository root:
-  python -m forecasting.pipeline preflight
-  python -m forecasting.pipeline jobs
-  python -m forecasting.pipeline train --id 0
-  python -m forecasting.pipeline select                 # all runs finished
-  python -m forecasting.pipeline authorize-test --selection-sha SHA256
-  python -m forecasting.pipeline test --id 0           # after authorization
-  python -m forecasting.pipeline persistence --id 0
-  python -m forecasting.pipeline report
+  python -m forecasting.scripts.pipeline preflight
+  python -m forecasting.scripts.pipeline jobs
+  python -m forecasting.scripts.pipeline train --id 0
+  python -m forecasting.scripts.pipeline select                 # all runs finished
+  python -m forecasting.scripts.pipeline authorize-test --selection-sha SHA256
+  python -m forecasting.scripts.pipeline test --id 0           # after authorization
+  python -m forecasting.scripts.pipeline persistence --id 0
+  python -m forecasting.scripts.pipeline report
 
 No Test observations enter training, checkpoint selection or lookback selection.
 """
@@ -31,11 +31,11 @@ import numpy as np
 import pandas as pd
 import torch
 
-from .data import SENSORS, WIND_INDEX, load_partitions, scaler_and_values, valid_starts, matching_origins, as_loader
-from .metrics import metric_tables, mixed_circular_mse, eval_validation_objectives
-from .models import build_model
+from ..core.data import SENSORS, WIND_INDEX, load_partitions, scaler_and_values, valid_starts, matching_origins, as_loader
+from ..core.metrics import metric_tables, mixed_circular_mse, eval_validation_objectives
+from ..core.models import build_model
 
-HERE = Path(__file__).resolve().parent
+HERE = Path(__file__).resolve().parents[1]
 PROJECT_ROOT = HERE.parent
 DEFAULT_DATA = PROJECT_ROOT / 'preprocessing/data/processed/ETIFA_clean_imputed_1h.csv'
 DEFAULT_OUTPUT = HERE / 'runs'
@@ -84,8 +84,8 @@ def load_json(path):
 def files_provenance(cfgpath, splits_path, csv):
     # No fixed SHA rejection: rebuilding the same scientific CSV can produce
     # byte-different float serialization across NumPy/Pandas environments.
-    source = ('__init__.py', 'architectures.py', 'models.py', 'data.py',
-              'metrics.py', 'pipeline.py')
+    source = ('__init__.py', 'core/architectures.py', 'core/models.py',
+              'core/data.py', 'core/metrics.py', 'scripts/pipeline.py')
     return {
         'dataset_sha256': digest(csv),
         'config_sha256': digest(cfgpath),
@@ -142,7 +142,7 @@ def jobdir(out, record):
 
 def threshold(cfg, H):
     p = cfg['thresholds_by_h'][str(H)]
-    from .data import ACTUATORS
+    from ..core.data import ACTUATORS
     return [p[name] for name in ACTUATORS]
 
 
