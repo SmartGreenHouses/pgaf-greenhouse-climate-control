@@ -35,4 +35,4 @@ This directory contains **original observations and their deterministic aggregat
 - `PGAF_validation_V2_Ubuntu.zip`: `c1d522a634cd04013d49222d0335aa0c91cbfeb8fa6f4fe62477fde90be94434`
 - `PGAF_forecasting_test_original.zip`: `af402ad9342c2fb32d37cc5af6099aa5e569ad0e009e123d98d36439ede36daa`
 
-The raw Test archives, complete checkpoints, per-origin Validation error arrays, and stepwise Persistence prediction arrays are not included in this compact results package. Preserve those source artifacts separately when archiving the full experimental evidence. They are not required to regenerate the tabular comparisons provided here.
+The 405 selected PyTorch checkpoints and their SHA-256 manifest are available in `../checkpoints/`. The raw Test execution archives, intermediate training checkpoints, per-origin Validation error arrays, and stepwise Persistence prediction arrays are not included in this results directory. Preserve those source artifacts separately when archiving the full experimental evidence. They are not required to regenerate the tabular comparisons provided here.

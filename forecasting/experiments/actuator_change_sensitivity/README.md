@@ -56,15 +56,15 @@ python forecasting/experiments/actuator_change_sensitivity/run.py
 
 Requires `preprocessing/data/processed/ETIFA_clean_imputed_1h.csv`, `forecasting/config.json`, `forecasting/splits.json` and `forecasting/results/validation/selected_lookbacks.csv`. The runner checks the dataset SHA-256 and partition boundaries and should find **75 / 37 / 60** episodes. No files are written in audit mode.
 
-## Verify one historical inference (recommended before publication)
+## Verify one historical inference (CUDA smoke test)
 
 With PyTorch installed and the published checkpoints present:
 
 ```bash
-python forecasting/experiments/actuator_change_sensitivity/run.py --smoke
+python forecasting/experiments/actuator_change_sensitivity/run.py --smoke --device cuda
 ```
 
-This runs one checkpoint (V1/H16/L48/LSTM/seed8) against all V1 event origins, and compares OBS/MASK/SUST predictions with the original saved NPZ, without writing results. A maximum discrepancy of 0.001 in physical units is allowed. **The package has not been smoke-tested against a model checkpoint in this environment; run this command on Ubuntu before committing the adapted runner.**
+This runs one checkpoint (V1/H16/L48/LSTM/seed8) against all V1 event origins, and compares OBS/MASK/SUST predictions with the original saved NPZ, without writing results. A maximum discrepancy of 0.001 in physical units is allowed. **Verified on Ubuntu with CUDA: OBS, MASK and SUST matched the archived predictions within approximately 3.81e-6 physical units for the selected LSTM checkpoint. This does not establish numerical equivalence for all 45 checkpoints.**
 
 ## Re-execute inference (optional, *not* needed to publish existing results)
 
@@ -72,7 +72,7 @@ Requires PyTorch, NumPy, pandas and the 45 selected H16 checkpoints in `forecast
 
 ```bash
 python forecasting/experiments/actuator_change_sensitivity/run.py \
-  --evaluate --confirm-event-definition --device cpu \
+  --evaluate --confirm-event-definition --device cuda \
   --output-root /tmp/pgaf_actuator_sensitivity_reproduction
 ```
 

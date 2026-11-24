@@ -15,14 +15,13 @@ The author requested the following names for the historical files:
 
 The renamed historical GA CSV is **not verified to be the same dataset** as the ETIFA preprocessing/V1–V3 forecasting dataset. Its SHA-256 differs from the previously supplied ETIFA imputed CSV. Do **not** claim they are the same data or that the GA used the PyTorch `lstm_sergiot` checkpoint. The GA uses its historical **TensorFlow/Keras** checkpoint, not the PyTorch forecasting model. These differences must be made explicit in the manuscript before publication.
 
-The code-only ZIP does **not** contain the 325 KB model or ~23 MB dataset; retain the already-copied originals in the directories above. `.gitignore` intentionally allows them to be tracked so the actual model/data can accompany public code when authorized.
+The GitHub repository includes the historical model and dataset at the paths above. Their SHA-256 hashes establish artifact identity, while their filenames are aliases that must not be interpreted as architectural or dataset equivalence. A single `.gitignore` is maintained at the repository root.
 
 ## Files
 
 ```text
 optimization/
   README.md
-  .gitignore
   requirements.txt
   constants.py
   genetic_algorithm_class.py

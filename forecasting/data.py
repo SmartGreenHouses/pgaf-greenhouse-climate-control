@@ -60,7 +60,7 @@ def scaler_and_values(frames):
         values=(physical-mean)/sd
         t=frame.timestamp.dt
         minutes=(t.hour*60+t.minute).to_numpy(dtype=np.float64)
-        day=t.dayofyear.to_numpy(dtype=np.float64)
+        day=t.day_of_year.to_numpy(dtype=np.float64)
         cyclic=np.column_stack((np.sin(2*np.pi*minutes/1440),np.cos(2*np.pi*minutes/1440),
                                 np.sin(2*np.pi*day/365.25),np.cos(2*np.pi*day/365.25)))
         result[part]=np.column_stack((values,cyclic)).astype(np.float32)
