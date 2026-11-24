@@ -23,8 +23,7 @@ flowchart LR
     D --> E[Validation-only lookback selection]
     E --> F[Held-out Test]
     E --> G[H16 actuator-change sensitivity]
-    B --> H[Historical GA dataset and surrogate]
-    H --> I[Genetic optimization]
+    J[Historical GA dataset and Keras LSTM] --> I[Genetic optimization]
 ```
 
 **Important:** The optimization branch uses a *separate historical dataset and TensorFlow/Keras LSTM*. The diagram does **not** indicate that the GA used the PyTorch forecasting checkpoints.

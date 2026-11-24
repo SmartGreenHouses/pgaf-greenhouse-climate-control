@@ -36,8 +36,8 @@ optimization/
   tuning_grid_config.json
   results/tuning_results.csv
   tests/test_optimization.py
-  models/LSTM_L48_H1.h5                 # separately supplied original
-  datasets/ETIFA_clean_imputed_1h.csv   # separately supplied original
+  models/LSTM_L48_H1.h5                 # original artifact included
+  datasets/ETIFA_clean_imputed_1h.csv   # original artifact included
 ```
 
 The `out/` directory contains generated outputs and is not tracked. The script/config labels containing `lb96_h12` in original grid metadata preserve traceability to archived experiment identifiers; `lb96` describes the **real** model history and `h12` the **GA control duration**.
@@ -56,7 +56,7 @@ Run from the repository root:
 
 ```bash
 PYTHONPATH=optimization python -m unittest discover -s optimization/tests -p 'test_optimization.py' -v
-shasum -a 256 optimization/models/LSTM_L48_H1.h5 optimization/datasets/ETIFA_clean_imputed_1h.csv
+sha256sum optimization/models/LSTM_L48_H1.h5 optimization/datasets/ETIFA_clean_imputed_1h.csv
 ```
 
 The eight tests cover the selected GA operators/settings, the 36-config grid, published tuning summary, and hashes of the two original assets. If model and CSV are absent, the asset test is skipped. Unit fitness tests use a simulated predictor; they **do not** test actual TensorFlow inference. To load the actual `.h5`:
