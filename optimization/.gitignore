@@ -1,8 +1,0 @@
-# Generated outputs and Python caches only.
-__pycache__/
-*.py[cod]
-/out/
-.DS_Store
-
-# Do not ignore /models or /datasets: these contain research artifacts
-# required for reproducibility (the actual binary assets are supplied locally).

@@ -83,6 +83,8 @@ ga-experimental/raw-results/
 *.tar
 *.tar.gz
 
-# Dataset and model are intentionally versioned in this repository:
-# datasets/DIRTY-DS-15-SUMMER.csv
-# models/LSTM_CLEAN-DS-15-SUMMER_best_TBS.h5
+# Research datasets, checkpoints and verified results are versioned.
+# Only temporary files and generated outputs are excluded.
+
+/forecasting/runs/
+/optimization/out/
