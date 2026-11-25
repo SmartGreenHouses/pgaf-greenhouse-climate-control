@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="535" viewBox="0 0 1200 535" role="img">
+<title>Connected PGAF research workflow</title>
+<desc>Greenhouse data preprocessing, climate forecasting, then genetic optimization using a predictive surrogate. Historical GA uses a separately archived TensorFlow-Keras LSTM.</desc>
+<defs><marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1 1L7 4.5L1 8" fill="none" stroke="#397d70" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrGrey" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1 1L7 4.5L1 8" fill="none" stroke="#78909c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="1200" height="535" fill="#ffffff"/>
+<text x="44" y="48" fill="#315c57" font-size="20" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >FROM OBSERVATIONS TO CONTROL DECISIONS</text>
+<path d="M43 66 L1158 66" fill="none" stroke="#dbe7e6" stroke-width="1.5"/>
+<rect x="38" y="175" width="151" height="198" rx="11" fill="#f9fcfa" stroke="#cbded5" stroke-width="2"/>
+<g transform="translate(113 231) scale(0.82)" fill="none" stroke="#2d7966" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0 23V-1 M0 6C-18 6-23-3-24-16C-8-14-3-7 0 6Z M0-3C2-21 14-25 25-23C23-7 13-2 0-3Z"/>
+      <path d="M-22 23H22"/></g>
+<text x="113" y="288" fill="#20463d" font-size="15" font-weight="700" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" >GREENHOUSE</text>
+<text x="113" y="313" fill="#20463d" font-size="15" font-weight="700" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" >OBSERVATIONS</text>
+<text x="113" y="341" fill="#637c79" font-size="13" font-weight="400" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" >15-min sampling</text>
+<rect x="225" y="140" width="260" height="250" rx="12" fill="#ffffff" stroke="#a5c8bc" stroke-width="2"/>
+<rect x="225" y="140" width="260" height="59" rx="12" fill="#f0f8f3" />
+<path d="M225 188H485" stroke="#d5e4dc" stroke-width="1.5"/>
+<g transform="translate(257 169) scale(0.42)" fill="none" stroke="#2d7966" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.6">
+      <ellipse cx="0" cy="-17" rx="18" ry="7"/><path d="M-18-17V17 C-18 27 18 27 18 17V-17 M-18-1C-18 9 18 9 18-1 M-18 17C-18 26 18 26 18 17"/></g>
+<text x="291" y="178" fill="#24654f" font-size="17" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >01  PREPROCESSING</text>
+<text x="246" y="234" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Quality checks</text>
+<text x="246" y="265" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Bounded gap reconstruction</text>
+<text x="246" y="296" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Curated time series</text>
+<path d="M246 323 L464 323" fill="none" stroke="#e1e9e7" stroke-width="1"/>
+<text x="246" y="355" fill="#527b6e" font-size="13" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Canonical forecasting dataset</text>
+<rect x="521" y="118" width="296" height="294" rx="12" fill="#ffffff" stroke="#afcad7" stroke-width="2"/>
+<rect x="521" y="118" width="296" height="59" rx="12" fill="#f0f6f9"/>
+<path d="M521 166H817" stroke="#d4e1e9" stroke-width="1.5"/>
+<g transform="translate(555 148) scale(0.4)" fill="none" stroke="#2c779c" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M-23 20V-19 M-23 20H25"/><path d="M-17 10L-6-1L4 5L23-18"/><path d="M16-18H23V-11"/></g>
+<text x="588" y="156" fill="#2f6485" font-size="17" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >02  FORECASTING</text>
+<text x="543" y="213" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >LSTM · iTransformer</text>
+<text x="543" y="240" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >PatchTST-MV · Persistence</text>
+<text x="543" y="279" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Validation-only selection</text>
+<text x="543" y="308" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Held-out Test evaluation</text>
+<path d="M542 332 L793 332" fill="none" stroke="#e1e9ec" stroke-width="1"/>
+<text x="543" y="360" fill="#47738a" font-size="14" font-weight="600" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Predictive model capability</text>
+<text x="543" y="385" fill="#657d86" font-size="13" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >+ archived model checkpoints</text>
+<rect x="853" y="140" width="308" height="250" rx="12" fill="#ffffff" stroke="#d6bd95" stroke-width="2"/>
+<rect x="853" y="140" width="308" height="59" rx="12" fill="#fbf7ef"/>
+<path d="M853 188H1161" stroke="#e8dfcf" stroke-width="1.5"/>
+<g transform="translate(884 170) scale(0.42)" fill="none" stroke="#96723a" stroke-width="2.6" stroke-linecap="round">
+      <circle cx="-17" cy="-12" r="6"/><circle cx="17" cy="-12" r="6"/><circle cx="0" cy="18" r="6"/>
+      <path d="M-11-9L-4 12 M11-9L4 12 M-11-12H11"/></g>
+<text x="916" y="178" fill="#956d35" font-size="17" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >03  OPTIMIZATION</text>
+<text x="874" y="234" fill="#2b3e43" font-size="15" font-weight="600" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >GA_ENGINEERING_AWARE</text>
+<text x="874" y="265" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Candidate actuator settings</text>
+<text x="874" y="296" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >LSTM surrogate evaluation</text>
+<path d="M874 323 L1138 323" fill="none" stroke="#ebe6dc" stroke-width="1"/>
+<text x="874" y="355" fill="#886638" font-size="14" font-weight="600" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Optimized control candidates</text>
+<path d="M189 272H225" stroke="#397d70" fill="none" stroke-width="2.5" marker-end="url(#arr)"/>
+<path d="M485 272H521" stroke="#397d70" fill="none" stroke-width="2.5" marker-end="url(#arr)"/>
+<path d="M817 272H853" stroke="#397d70" fill="none" stroke-width="2.5" marker-end="url(#arr)"/>
+<rect x="228" y="445" width="933" height="57" rx="8" fill="#f8fafb" stroke="#d8e1e4" stroke-width="1.3"/>
+<path d="M1000 390V444" stroke="#78909c" stroke-dasharray="5 4" stroke-width="1.8" fill="none"/>
+<text x="245" y="465" fill="#476574" font-size="13" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >ARCHIVED GA REPRODUCTION</text>
+<text x="245" y="487" fill="#50656d" font-size="12" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Uses its own historical dataset + TensorFlow/Keras LSTM; the PyTorch forecasting checkpoint is not transferred directly.</text>
+</svg>

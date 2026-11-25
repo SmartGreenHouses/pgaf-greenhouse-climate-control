@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="310" viewBox="0 0 1100 310" role="img">
+<title>Released research artifacts</title>
+<desc>Two distinct archived experiment paths: canonical forecasting data to PyTorch models and historical GA data plus Keras surrogate to engineering-aware genetic algorithm.</desc>
+<defs><marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1 1L7 4.5L1 8" fill="none" stroke="#397d70" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrGrey" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1 1L7 4.5L1 8" fill="none" stroke="#78909c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="1100" height="310" fill="#ffffff"/>
+<text x="42" y="43" fill="#315c57" font-size="18" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >ARCHIVED ARTIFACTS</text>
+<path d="M42 60 L1057 60" fill="none" stroke="#e0e7e7" stroke-width="1.5"/>
+<rect x="55" y="86" width="335" height="81" rx="9" fill="#f9fcfa" stroke="#b5d1c5" stroke-width="2"/>
+<text x="74" y="117" fill="#234d42" font-size="18" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Canonical ETIFA dataset</text>
+<text x="74" y="144" fill="#637974" font-size="13" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >preprocessing/data/processed/</text>
+<path d="M390 128H439" stroke="#3e806f" stroke-width="2.2" marker-end="url(#arr)" fill="none"/>
+<rect x="442" y="86" width="322" height="81" rx="9" fill="#f7fbfd" stroke="#bad4df" stroke-width="2"/>
+<text x="462" y="117" fill="#285a78" font-size="18" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >PyTorch forecasting models</text>
+<text x="462" y="144" fill="#647d88" font-size="13" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >405 selected checkpoints</text>
+<rect x="790" y="86" width="258" height="81" rx="9" fill="#f7fbfd" stroke="#bad4df" stroke-width="2"/>
+<text x="809" y="117" fill="#285a78" font-size="17" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Validation / Test results</text>
+<text x="809" y="144" fill="#647d88" font-size="13" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >V1 · V2 · V3</text>
+<path d="M764 128H787" stroke="#78909c" stroke-width="2.2" marker-end="url(#arrGrey)" fill="none"/>
+<path d="M58 194 L1046 194" fill="none" stroke="#e4e9e9" stroke-width="1.4"/>
+<rect x="55" y="218" width="335" height="69" rx="9" fill="#fafaf9" stroke="#e0d4be" stroke-width="2"/>
+<text x="74" y="245" fill="#755b35" font-size="18" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Historical GA dataset</text>
+<text x="74" y="267" fill="#8c7655" font-size="13" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >optimization/datasets/</text>
+<rect x="442" y="218" width="322" height="69" rx="9" fill="#fafaf9" stroke="#e0d4be" stroke-width="2"/>
+<text x="461" y="245" fill="#755b35" font-size="18" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Historical Keras LSTM</text>
+<text x="461" y="267" fill="#8c7655" font-size="13" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >optimization/models/</text>
+<rect x="790" y="218" width="258" height="69" rx="9" fill="#fafaf9" stroke="#e0d4be" stroke-width="2"/>
+<text x="809" y="245" fill="#755b35" font-size="18" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Genetic optimization</text>
+<text x="809" y="267" fill="#8c7655" font-size="13" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >36 tuning configurations</text>
+<path d="M390 252V298H780V275H787" stroke="#96723a" stroke-width="2.2" fill="none"/>
+<path d="M764 252H787" stroke="#96723a" stroke-width="2.2" fill="none"/>
+</svg>

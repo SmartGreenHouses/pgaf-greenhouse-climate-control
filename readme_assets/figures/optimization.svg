@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="138" viewBox="0 0 280 138" role="img">
+<title>Optimization module</title>
+<desc>Original minimalist module illustration</desc>
+<defs><marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1 1L7 4.5L1 8" fill="none" stroke="#397d70" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrGrey" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1 1L7 4.5L1 8" fill="none" stroke="#78909c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="280" height="138" fill="#ffffff"/>
+<rect x="4" y="4" width="272" height="130" rx="10" fill="#ffffff" stroke="#d7e5e3" stroke-width="1.2"/>
+<rect x="18" y="22" width="86" height="92" rx="10" fill="#f5f9f8"/>
+<g transform="translate(61 68) scale(0.82)" fill="none" stroke="#96723a" stroke-width="2.6" stroke-linecap="round">
+      <circle cx="-17" cy="-12" r="6"/><circle cx="17" cy="-12" r="6"/><circle cx="0" cy="18" r="6"/>
+      <path d="M-11-9L-4 12 M11-9L4 12 M-11-12H11"/></g>
+<text x="124" y="63" fill="#243b45" font-size="18" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Optimization</text>
+<text x="124" y="90" fill="#667d83" font-size="11.5" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >GA · surrogate model</text>
+</svg>
