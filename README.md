@@ -73,7 +73,7 @@ tests/             unit, protocol and artifact-integrity checks
 
 ## [Preprocessing](preprocessing/)
 
-<img align="right" src="readme_assets/figures/preprocessing.svg" width="195"
+<img align="right" src="readme_assets/figures/preprocessing.svg" width="105"
      alt="Preprocessing: greenhouse data quality control and reconstruction">
 
 The input to the forecasting study is a **15-minute greenhouse time series**.
@@ -109,7 +109,7 @@ sampling remains at **15-minute intervals**.
 
 ## [Forecasting](forecasting/)
 
-<img align="right" src="readme_assets/figures/forecasting.svg" width="195"
+<img align="right" src="readme_assets/figures/forecasting.svg" width="105"
      alt="Forecasting: learning and assessing greenhouse climate models">
 
 This is the **predictive stage**. It implements **LSTM**, **iTransformer** and
@@ -147,7 +147,7 @@ error. It is a retrospective sensitivity analysis, **not** a causal intervention
 
 ## [Optimization](optimization/)
 
-<img align="right" src="readme_assets/figures/optimization.svg" width="195"
+<img align="right" src="readme_assets/figures/optimization.svg" width="105"
      alt="Optimization: genetic algorithm guided by a predictive surrogate">
 
 This is the **decision-search stage**. A genetic algorithm explores candidate
@@ -192,10 +192,16 @@ full computational reproduction of every original experiment.
 
 # How does it work?
 
+The diagram summarizes the connected research workflow. Arrows use the color of the stage they leave: green for data preparation and blue for forecasting.
+
 <p align="center">
-  <img src="readme_assets/figures/research-workflow.svg" width="1000"
-       alt="Connected research workflow from observations through preprocessing and forecasting to genetic optimization, with historical GA provenance noted">
+  <img src="readme_assets/figures/research-workflow.svg" width="100%"
+       alt="Connected PGAF workflow from greenhouse observations to green preprocessing, blue forecasting and amber optimization">
 </p>
+
+**Interpretation:** this is the methodological connection between prediction and optimization.
+The released historical GA implementation uses its own TensorFlow/Keras surrogate and dataset;
+it does not load the PyTorch forecasting checkpoints directly.
 
 PGAF connects **two research stages**: first, learning to predict greenhouse
 climate; second, using a predictive model to search for improved candidate
@@ -260,19 +266,23 @@ validation of real-world control performance.
 ## → Which artifacts belong to each experiment?
 
 <p align="center">
-  <img src="readme_assets/figures/artifact-provenance.svg" width="900"
-       alt="Distinct historical artifact paths for forecasting and genetic optimization">
+  <img src="readme_assets/figures/artifact-provenance.svg" width="100%"
+       alt="Data to forecasting to Validation-selected best predictive model and genetic optimization, with consistent icons and source-colored arrows">
 </p>
 
-The **research idea is connected** — a predictor helps an optimizer evaluate
-candidate controls — but **the released file artifacts are not interchangeable**.
+The **research idea is connected**: a model chosen using **Validation** can
+serve as a surrogate for actuator optimization. The star in the fourth box denotes
+a Validation-selected forecasting model (selection depends on the experimental version and horizon,
+not one universal winner). **Test results do not determine the selection**. **In the released historical GA,
+however, the archived TensorFlow/Keras LSTM is a different checkpoint** from the
+Validation-selected PyTorch forecasting models. The artifacts are not interchangeable.
 Forecasting uses canonical ETIFA data and PyTorch checkpoints; the GA uses the
 historical `DIRTY-DS-15-SUMMER.csv` dataset (stored under the filename
 `ETIFA_clean_imputed_1h.csv`) and historical `model_lstm_lb96.h5` checkpoint
 (stored as `LSTM_L48_H1.h5`, with actual input shape **96 × 17**).
 
-Thus, the connected workflow does **not** imply that the GA loads any selected
-PyTorch forecasting checkpoint. See [Optimization](optimization/README.md) for
+The five-box diagram describes the **intended method**, not a literal file transfer:
+the released GA **does not load** a selected PyTorch forecasting checkpoint. See [Optimization](optimization/README.md) for
 historical artifact hashes and provenance.
 
 ---

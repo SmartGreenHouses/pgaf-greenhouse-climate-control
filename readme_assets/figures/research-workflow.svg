@@ -1,58 +1,64 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="535" viewBox="0 0 1200 535" role="img">
-<title>Connected PGAF research workflow</title>
-<desc>Greenhouse data preprocessing, climate forecasting, then genetic optimization using a predictive surrogate. Historical GA uses a separately archived TensorFlow-Keras LSTM.</desc>
-<defs><marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1 1L7 4.5L1 8" fill="none" stroke="#397d70" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="arrGrey" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1 1L7 4.5L1 8" fill="none" stroke="#78909c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-<rect width="1200" height="535" fill="#ffffff"/>
-<text x="44" y="48" fill="#315c57" font-size="20" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >FROM OBSERVATIONS TO CONTROL DECISIONS</text>
-<path d="M43 66 L1158 66" fill="none" stroke="#dbe7e6" stroke-width="1.5"/>
-<rect x="38" y="175" width="151" height="198" rx="11" fill="#f9fcfa" stroke="#cbded5" stroke-width="2"/>
-<g transform="translate(113 231) scale(0.82)" fill="none" stroke="#2d7966" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M0 23V-1 M0 6C-18 6-23-3-24-16C-8-14-3-7 0 6Z M0-3C2-21 14-25 25-23C23-7 13-2 0-3Z"/>
-      <path d="M-22 23H22"/></g>
-<text x="113" y="288" fill="#20463d" font-size="15" font-weight="700" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" >GREENHOUSE</text>
-<text x="113" y="313" fill="#20463d" font-size="15" font-weight="700" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" >OBSERVATIONS</text>
-<text x="113" y="341" fill="#637c79" font-size="13" font-weight="400" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" >15-min sampling</text>
-<rect x="225" y="140" width="260" height="250" rx="12" fill="#ffffff" stroke="#a5c8bc" stroke-width="2"/>
-<rect x="225" y="140" width="260" height="59" rx="12" fill="#f0f8f3" />
-<path d="M225 188H485" stroke="#d5e4dc" stroke-width="1.5"/>
-<g transform="translate(257 169) scale(0.42)" fill="none" stroke="#2d7966" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.6">
-      <ellipse cx="0" cy="-17" rx="18" ry="7"/><path d="M-18-17V17 C-18 27 18 27 18 17V-17 M-18-1C-18 9 18 9 18-1 M-18 17C-18 26 18 26 18 17"/></g>
-<text x="291" y="178" fill="#24654f" font-size="17" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >01  PREPROCESSING</text>
-<text x="246" y="234" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Quality checks</text>
-<text x="246" y="265" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Bounded gap reconstruction</text>
-<text x="246" y="296" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Curated time series</text>
-<path d="M246 323 L464 323" fill="none" stroke="#e1e9e7" stroke-width="1"/>
-<text x="246" y="355" fill="#527b6e" font-size="13" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Canonical forecasting dataset</text>
-<rect x="521" y="118" width="296" height="294" rx="12" fill="#ffffff" stroke="#afcad7" stroke-width="2"/>
-<rect x="521" y="118" width="296" height="59" rx="12" fill="#f0f6f9"/>
-<path d="M521 166H817" stroke="#d4e1e9" stroke-width="1.5"/>
-<g transform="translate(555 148) scale(0.4)" fill="none" stroke="#2c779c" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M-23 20V-19 M-23 20H25"/><path d="M-17 10L-6-1L4 5L23-18"/><path d="M16-18H23V-11"/></g>
-<text x="588" y="156" fill="#2f6485" font-size="17" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >02  FORECASTING</text>
-<text x="543" y="213" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >LSTM · iTransformer</text>
-<text x="543" y="240" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >PatchTST-MV · Persistence</text>
-<text x="543" y="279" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Validation-only selection</text>
-<text x="543" y="308" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Held-out Test evaluation</text>
-<path d="M542 332 L793 332" fill="none" stroke="#e1e9ec" stroke-width="1"/>
-<text x="543" y="360" fill="#47738a" font-size="14" font-weight="600" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Predictive model capability</text>
-<text x="543" y="385" fill="#657d86" font-size="13" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >+ archived model checkpoints</text>
-<rect x="853" y="140" width="308" height="250" rx="12" fill="#ffffff" stroke="#d6bd95" stroke-width="2"/>
-<rect x="853" y="140" width="308" height="59" rx="12" fill="#fbf7ef"/>
-<path d="M853 188H1161" stroke="#e8dfcf" stroke-width="1.5"/>
-<g transform="translate(884 170) scale(0.42)" fill="none" stroke="#96723a" stroke-width="2.6" stroke-linecap="round">
-      <circle cx="-17" cy="-12" r="6"/><circle cx="17" cy="-12" r="6"/><circle cx="0" cy="18" r="6"/>
-      <path d="M-11-9L-4 12 M11-9L4 12 M-11-12H11"/></g>
-<text x="916" y="178" fill="#956d35" font-size="17" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >03  OPTIMIZATION</text>
-<text x="874" y="234" fill="#2b3e43" font-size="15" font-weight="600" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >GA_ENGINEERING_AWARE</text>
-<text x="874" y="265" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Candidate actuator settings</text>
-<text x="874" y="296" fill="#233944" font-size="16" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >LSTM surrogate evaluation</text>
-<path d="M874 323 L1138 323" fill="none" stroke="#ebe6dc" stroke-width="1"/>
-<text x="874" y="355" fill="#886638" font-size="14" font-weight="600" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Optimized control candidates</text>
-<path d="M189 272H225" stroke="#397d70" fill="none" stroke-width="2.5" marker-end="url(#arr)"/>
-<path d="M485 272H521" stroke="#397d70" fill="none" stroke-width="2.5" marker-end="url(#arr)"/>
-<path d="M817 272H853" stroke="#397d70" fill="none" stroke-width="2.5" marker-end="url(#arr)"/>
-<rect x="228" y="445" width="933" height="57" rx="8" fill="#f8fafb" stroke="#d8e1e4" stroke-width="1.3"/>
-<path d="M1000 390V444" stroke="#78909c" stroke-dasharray="5 4" stroke-width="1.8" fill="none"/>
-<text x="245" y="465" fill="#476574" font-size="13" font-weight="700" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >ARCHIVED GA REPRODUCTION</text>
-<text x="245" y="487" fill="#50656d" font-size="12" font-weight="400" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" >Uses its own historical dataset + TensorFlow/Keras LSTM; the PyTorch forecasting checkpoint is not transferred directly.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1390" height="394" viewBox="0 0 1390 394" role="img">
+<title>PGAF connected research workflow</title>
+<desc>Greenhouse observations, green preprocessing, blue climate forecasting and amber genetic optimization. Every arrow is thin and colored by its origin stage.</desc>
+<rect width="1390" height="394" fill="#FFFFFF"/>
+<rect x="25" y="113" width="220" height="190" rx="11" fill="#ffffff" stroke="#B5D4C1" stroke-width="1.7"/>
+<rect x="107" y="132" width="56" height="56" rx="11" fill="#F3F9F5" stroke="#B5D4C1" stroke-width="1.0"/>
+<g transform="translate(135 161) scale(0.75)" fill="none" stroke="#2B765B" stroke-width="2.45" stroke-linecap="round" stroke-linejoin="round"><path d="M-25 20V-7L0-25L25-7V20H-25"/><path d="M-16 20V-7H16V20"/><path d="M0 20V1 M0 10C-11 10-14 4-15-5C-6-4-2 1 0 10 M0 4C2-9 8-13 16-13C15-4 10 2 0 4"/></g>
+<text x="135.0" y="216" fill="#2B765B" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">Greenhouse</text>
+<text x="135.0" y="240" fill="#2B765B" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">observations</text>
+<text x="135.0" y="269" fill="#61757C" font-family="DejaVu Sans, Arial, sans-serif" font-size="14.2" font-weight="400" text-anchor="middle">15-minute sampling</text>
+<rect x="288" y="57" width="322" height="298" rx="12" fill="#ffffff" stroke="#B5D4C1" stroke-width="1.7"/>
+<path d="M300 58H598Q609 58 609 69V137H289V69Q289 58 300 58Z" fill="#F3F9F5"/>
+<path d="M302 138H596" fill="none" stroke="#B5D4C1" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="308" y="73" width="51" height="51" rx="9" fill="#F3F9F5" stroke="#B5D4C1" stroke-width="1.0"/>
+<g transform="translate(333.5 96.5) scale(0.64)" fill="none" stroke="#2B765B" stroke-width="2.45" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="0" cy="-15" rx="17" ry="6.2"/><path d="M-17 -15V17C-17 26 17 26 17 17V-15"/><path d="M-17 1C-17 9 17 9 17 1"/></g>
+<path d="M370 75V122" fill="none" stroke="#B5D4C1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+<text x="386" y="106" fill="#2B765B" font-family="DejaVu Sans, Arial, sans-serif" font-size="21.5" font-weight="700" text-anchor="start">Preprocessing</text>
+<circle cx="319" cy="170" r="3.4" fill="#2B765B"/>
+<text x="333" y="175" fill="#263B43" font-family="DejaVu Sans, Arial, sans-serif" font-size="17.1" font-weight="400" text-anchor="start">Quality checks</text>
+<circle cx="319" cy="199" r="3.4" fill="#2B765B"/>
+<text x="333" y="204" fill="#263B43" font-family="DejaVu Sans, Arial, sans-serif" font-size="17.1" font-weight="400" text-anchor="start">Bounded gap reconstruction</text>
+<circle cx="319" cy="228" r="3.4" fill="#2B765B"/>
+<text x="333" y="233" fill="#263B43" font-family="DejaVu Sans, Arial, sans-serif" font-size="17.1" font-weight="400" text-anchor="start">Curated time series</text>
+<path d="M311 283 H587" fill="none" stroke="#B5D4C1" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" />
+<text x="449.0" y="319" fill="#2B765B" font-family="DejaVu Sans, Arial, sans-serif" font-size="16.9" font-weight="600" text-anchor="middle">Canonical forecasting dataset</text>
+<rect x="654" y="57" width="322" height="298" rx="12" fill="#ffffff" stroke="#AECFDF" stroke-width="1.7"/>
+<path d="M666 58H964Q975 58 975 69V137H655V69Q655 58 666 58Z" fill="#F3F8FC"/>
+<path d="M668 138H962" fill="none" stroke="#AECFDF" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="674" y="73" width="51" height="51" rx="9" fill="#F3F8FC" stroke="#AECFDF" stroke-width="1.0"/>
+<g transform="translate(699.5 96.5) scale(0.64)" fill="none" stroke="#286FA4" stroke-width="2.45" stroke-linecap="round" stroke-linejoin="round"><path d="M-24 -18V21H26"/><path d="M-18 10L-6 -2L4 4L19 -14"/><circle cx="-18" cy="10" r="2.9" fill="#ffffff"/><circle cx="-6" cy="-2" r="2.9" fill="#ffffff"/><circle cx="4" cy="4" r="2.9" fill="#ffffff"/><circle cx="19" cy="-14" r="3.1" fill="#ffffff"/></g>
+<path d="M736 75V122" fill="none" stroke="#AECFDF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+<text x="752" y="106" fill="#286FA4" font-family="DejaVu Sans, Arial, sans-serif" font-size="21.5" font-weight="700" text-anchor="start">Forecasting</text>
+<circle cx="685" cy="170" r="3.4" fill="#286FA4"/>
+<text x="699" y="175" fill="#263B43" font-family="DejaVu Sans, Arial, sans-serif" font-size="17.1" font-weight="400" text-anchor="start">LSTM · iTransformer</text>
+<circle cx="685" cy="199" r="3.4" fill="#286FA4"/>
+<text x="699" y="204" fill="#263B43" font-family="DejaVu Sans, Arial, sans-serif" font-size="17.1" font-weight="400" text-anchor="start">PatchTST-MV · Persistence</text>
+<circle cx="685" cy="228" r="3.4" fill="#286FA4"/>
+<text x="699" y="233" fill="#263B43" font-family="DejaVu Sans, Arial, sans-serif" font-size="17.1" font-weight="400" text-anchor="start">Validation-only selection</text>
+<circle cx="685" cy="257" r="3.4" fill="#286FA4"/>
+<text x="699" y="262" fill="#263B43" font-family="DejaVu Sans, Arial, sans-serif" font-size="17.1" font-weight="400" text-anchor="start">Held-out Test evaluation</text>
+<path d="M677 283 H953" fill="none" stroke="#AECFDF" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" />
+<text x="815.0" y="319" fill="#286FA4" font-family="DejaVu Sans, Arial, sans-serif" font-size="16.9" font-weight="600" text-anchor="middle">Predictive model capability</text>
+<rect x="1020" y="57" width="343" height="298" rx="12" fill="#ffffff" stroke="#DEC19B" stroke-width="1.7"/>
+<path d="M1032 58H1351Q1362 58 1362 69V137H1021V69Q1021 58 1032 58Z" fill="#FFFAF2"/>
+<path d="M1034 138H1349" fill="none" stroke="#DEC19B" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="1040" y="73" width="51" height="51" rx="9" fill="#FFFAF2" stroke="#DEC19B" stroke-width="1.0"/>
+<g transform="translate(1065.5 96.5) scale(0.64)" fill="none" stroke="#A8742F" stroke-width="2.45" stroke-linecap="round" stroke-linejoin="round"><circle cx="-21" cy="15" r="4" fill="#ffffff"/><circle cx="-5" cy="-9" r="4" fill="#ffffff"/><circle cx="13" cy="6" r="4" fill="#ffffff"/><path d="M-18 11L-7 -5L9 3L-17 14" stroke-dasharray="2.8 4"/><path d="M-5-9H4" opacity="0"/><path d="M13 1V-23L28-17L13-10"/></g>
+<path d="M1102 75V122" fill="none" stroke="#DEC19B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+<text x="1118" y="106" fill="#A8742F" font-family="DejaVu Sans, Arial, sans-serif" font-size="21.5" font-weight="700" text-anchor="start">Optimization</text>
+<circle cx="1051" cy="170" r="3.4" fill="#A8742F"/>
+<text x="1065" y="175" fill="#263B43" font-family="DejaVu Sans, Arial, sans-serif" font-size="17.1" font-weight="400" text-anchor="start">GA_ENGINEERING_AWARE</text>
+<circle cx="1051" cy="199" r="3.4" fill="#A8742F"/>
+<text x="1065" y="204" fill="#263B43" font-family="DejaVu Sans, Arial, sans-serif" font-size="17.1" font-weight="400" text-anchor="start">Candidate actuator settings</text>
+<circle cx="1051" cy="228" r="3.4" fill="#A8742F"/>
+<text x="1065" y="233" fill="#263B43" font-family="DejaVu Sans, Arial, sans-serif" font-size="17.1" font-weight="400" text-anchor="start">LSTM surrogate evaluation</text>
+<path d="M1043 283 H1340" fill="none" stroke="#DEC19B" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" />
+<text x="1191.5" y="319" fill="#A8742F" font-family="DejaVu Sans, Arial, sans-serif" font-size="16.9" font-weight="600" text-anchor="middle">Optimized control candidates</text>
+<path d="M245 208 H274.6" fill="none" stroke="#2B765B" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M273.6 201.5 L284.6 208 L273.6 214.5" fill="none" stroke="#2B765B" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M610 208 H640.6" fill="none" stroke="#2B765B" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M639.6 201.5 L650.6 208 L639.6 214.5" fill="none" stroke="#2B765B" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M976 208 H1006.6" fill="none" stroke="#286FA4" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1005.6 201.5 L1016.6 208 L1005.6 214.5" fill="none" stroke="#286FA4" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
 </svg>
