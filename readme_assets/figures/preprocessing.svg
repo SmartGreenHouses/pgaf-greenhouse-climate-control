@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="111" viewBox="0 0 150 111" role="img">
+<title>Preprocessing pictogram</title>
+<desc>PGAF module pictogram in the same icon family as workflow figures</desc>
+<rect width="150" height="111" fill="#FFFFFF"/>
+<rect x="12" y="12" width="126" height="87" rx="14" fill="#F3F9F5" stroke="#B5D4C1" stroke-width="1.65"/>
+<g transform="translate(75 50) scale(1.02)" fill="none" stroke="#2B765B" stroke-width="2.45" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="0" cy="-15" rx="17" ry="6.2"/><path d="M-17 -15V17C-17 26 17 26 17 17V-15"/><path d="M-17 1C-17 9 17 9 17 1"/></g>
+</svg>

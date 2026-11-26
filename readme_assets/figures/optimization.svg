@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="111" viewBox="0 0 150 111" role="img">
+<title>Optimization pictogram</title>
+<desc>PGAF module pictogram in the same icon family as workflow figures</desc>
+<rect width="150" height="111" fill="#FFFFFF"/>
+<rect x="12" y="12" width="126" height="87" rx="14" fill="#FFFAF2" stroke="#DEC19B" stroke-width="1.65"/>
+<g transform="translate(75 50) scale(1.02)" fill="none" stroke="#A8742F" stroke-width="2.45" stroke-linecap="round" stroke-linejoin="round"><circle cx="-21" cy="15" r="4" fill="#ffffff"/><circle cx="-5" cy="-9" r="4" fill="#ffffff"/><circle cx="13" cy="6" r="4" fill="#ffffff"/><path d="M-18 11L-7 -5L9 3L-17 14" stroke-dasharray="2.8 4"/><path d="M-5-9H4" opacity="0"/><path d="M13 1V-23L28-17L13-10"/></g>
+</svg>
